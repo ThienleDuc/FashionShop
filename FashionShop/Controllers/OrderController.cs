@@ -16,7 +16,7 @@ namespace FashionShop.Controllers
 
         public ActionResult ChiTietDonHang()
         {
-            ViewBag.TrangThai = "Chờ xác nhận";
+            ViewBag.TrangThai = "Hoàn thành";
             return View();
         }
 

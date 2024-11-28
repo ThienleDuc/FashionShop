@@ -17,19 +17,30 @@
 
                 <!-- Lý do hủy đơn -->
                 <div class="form-group">
-                    <label for="cancelReason">Lý do hủy đơn:</label>
-                    <select class="form-control" id="cancelReason" onchange="toggleOtherReason()">
-                        <option value="noNeed">Tôi không có nhu cầu mua nữa</option>
-                        <option value="changeAddress">Tôi muốn đổi địa chỉ</option>
-                        <option value="changeColorSize">Tôi muốn thay đổi màu sắc, kích cỡ</option>
-                        <option value="other">Lý do khác</option>
-                    </select>
+                    <label><strong>Lý do hủy đơn:</strong></label>
+                    <!-- Radio Button -->
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="noNeed" name="cancelReason" value="noNeed" checked>
+                        <label class="custom-control-label" for="noNeed">Tôi không có nhu cầu mua nữa</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="changeAddress" name="cancelReason" value="changeAddress">
+                        <label class="custom-control-label" for="changeAddress">Tôi muốn đổi địa chỉ</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="changeColorSize" name="cancelReason" value="changeColorSize">
+                        <label class="custom-control-label" for="changeColorSize">Tôi muốn thay đổi màu sắc, kích cỡ</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="otherReason" name="cancelReason" value="other">
+                        <label class="custom-control-label" for="otherReason">Lý do khác</label>
+                    </div>
                 </div>
 
-                <!-- Lý do khác -->
+                <!-- Lý do khác (hiển thị khi chọn "Lý do khác") -->
                 <div class="form-group" id="otherReasonDiv" style="display:none;">
-                    <label for="otherReason">Lý do khác:</label>
-                    <input type="text" class="form-control" id="otherReason" placeholder="Vui lòng điền lý do hủy">
+                    <label for="otherReasonInput">Vui lòng nhập lý do:</label>
+                    <input type="text" class="form-control" id="otherReasonInput" placeholder="Nhập lý do hủy">
                 </div>
             </div>
             <div class="modal-footer">
@@ -41,15 +52,15 @@
 </div>
 
 <script>
-    function toggleOtherReason() {
-        var cancelReason = document.getElementById('cancelReason').value;
-        var otherReasonDiv = document.getElementById('otherReasonDiv');
-
-        // Nếu chọn "Lý do khác", hiển thị ô nhập lý do
-        if (cancelReason === "other") {
-            otherReasonDiv.style.display = "block";
-        } else {
-            otherReasonDiv.style.display = "none";
-        }
-    }
+    // Lắng nghe sự kiện thay đổi khi chọn radio button
+    document.getElementsByName('cancelReason').forEach(function (radioButton) {
+        radioButton.addEventListener('change', function () {
+            var otherReasonDiv = document.getElementById('otherReasonDiv');
+            if (this.value === 'other') {
+                otherReasonDiv.style.display = 'block'; // Hiển thị ô nhập lý do nếu chọn "Lý do khác"
+            } else {
+                otherReasonDiv.style.display = 'none'; // Ẩn ô nhập lý do nếu chọn các lý do khác
+            }
+        });
+    });
 </script>

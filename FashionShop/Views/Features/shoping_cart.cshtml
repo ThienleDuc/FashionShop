@@ -1,7 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Shoping cart";
-
+    ViewBag.Title = "Shopping Cart";
 }
 
 <!-- Page Header Start -->
@@ -18,7 +17,6 @@
 <!-- Page Header End -->
 <!-- Cart Start -->
 <div class="container-fluid pt-5">
-    <!-- Table Section: Card for Cart Items -->
     <div class="mb-5">
         <div class="card border-secondary">
             <div class="card-body">
@@ -35,8 +33,14 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
+                        <!-- Example Product Row -->
                         <tr>
-                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
+                            <td class="align-middle">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input product-checkbox" id="product-1" name="product">
+                                    <label class="custom-control-label" for="product-1">Chọn</label>
+                                </div>
+                            </td>
                             <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
                             <td class="align-middle">Colorful Stylish Shirt</td>
                             <td class="align-middle">$150</td>
@@ -59,77 +63,6 @@
                             <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                         </tr>
 
-                        <tr>
-                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
-                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
-                            <td class="align-middle">Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-
-                        <tr>
-                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
-                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
-                            <td class="align-middle">Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-
-                        <tr>
-                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
-                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
-                            <td class="align-middle">Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
                         <!-- Repeat similar rows for other products -->
                     </tbody>
                 </table>
@@ -137,27 +70,31 @@
         </div>
     </div>
 
-    <!-- Cart Summary Section: Gộp thành 1 card và chia 2 cột -->
+    <div id="errorMessage" class="alert alert-danger" hidden>
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="col">
+                <span class="error-message"></span>
+            </div>
+        </div>
+    </div>
+
     <div class="mb-5">
         <div class="card border-secondary sticky-card" id="cartSummaryCard">
             <div class="card-body">
                 <div class="row">
-                    <!-- Cột 1: Quản lý sản phẩm (Chọn tất cả và Xóa) -->
                     <div class="col-md-6 mb-3">
                         <div class="d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <input type="checkbox" id="selectAll" class="mr-2">
-                                <label for="selectAll" class="mb-0">Chọn tất cả</label>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="selectAll">
+                                <label class="custom-control-label" for="selectAll">Chọn tất cả</label>
                             </div>
-                            <!-- Nút "Xóa" - không có nền và border -->
-                            <button class="btn btn-link btn-sm">Xóa</button>
-
-                            <!-- Nút "Chọn hoặc nhập mã" - màu xanh dương đậm, không có nền và border -->
+                            <button class="btn btn-link btn-sm" id="DeleteProduct" data-toggle="modal" data-target="#confirmDeleteModal">Xóa</button>
                             <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#discountCodeModal" style="color: #0056b3; border: none;">Chọn hoặc nhập mã</button>
                         </div>
                     </div>
-
-                    <!-- Cột 2: Tóm tắt giỏ hàng (Tổng tiền và Mua hàng) -->
                     <div class="col-md-6 mb-3">
                         <div class="row">
                             <div class="col-md-8">
@@ -165,7 +102,7 @@
                                 <p class="mb-0 text-right">Số tiền tiết kiệm: <strong>$20</strong></p>
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-success btn-block py-2" onclick="window.location.href='@Url.Action("Checkout", "Features")'">Mua hàng</button>
+                                <button class="btn btn-success btn-block py-2" id="OrderProduct">Mua hàng</button>
                             </div>
                         </div>
                     </div>
@@ -173,7 +110,60 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Modal Xác nhận Xóa -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Xác Nhận Xóa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn chắc chắn muốn xóa <span id="productCount">0</span> sản phẩm đã chọn khỏi giỏ hàng?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Có, xóa sản phẩm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @Html.Partial("SelectVoucher")
 </div>
 <!-- Cart End -->
+
+<script>
+    // Lắng nghe sự kiện khi checkbox "Chọn tất cả" thay đổi
+    document.getElementById("selectAll").addEventListener("change", function () {
+        // Lấy tất cả các checkbox sản phẩm
+        var checkboxes = document.querySelectorAll(".product-checkbox");
+
+        // Lặp qua tất cả checkbox và thay đổi trạng thái tương ứng với checkbox "Chọn tất cả"
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = document.getElementById("selectAll").checked;
+        });
+    });
+
+    // Lắng nghe sự kiện khi một sản phẩm nào đó được chọn hoặc bỏ chọn
+    var productCheckboxes = document.querySelectorAll(".product-checkbox");
+    productCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+            // Kiểm tra xem có tất cả các checkbox được chọn không
+            var allChecked = true;
+            productCheckboxes.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    allChecked = false;
+                }
+            });
+
+            // Nếu tất cả các checkbox được chọn, đặt checkbox "Chọn tất cả" thành checked
+            document.getElementById("selectAll").checked = allChecked;
+        });
+    });
+
+
+</script>

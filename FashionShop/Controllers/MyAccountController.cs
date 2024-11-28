@@ -41,6 +41,11 @@ namespace FashionShop.Controllers
             ViewBag.Name = "Lê Đức Thiện";
             ViewBag.PhoneNumber = "0862972248";
             ViewBag.Location = "KTX trướng Sư Phạm Kỹ Thuật - Đai Học Đà Nẵng";
+
+            // Dữ liệu cho Tỉnh, Quận, Xã
+            ViewBag.Province = "Đà Nẵng";   
+            ViewBag.District = "Hải Châu";  
+            ViewBag.Ward = "Thanh Bình";
             return View();
         }
 
