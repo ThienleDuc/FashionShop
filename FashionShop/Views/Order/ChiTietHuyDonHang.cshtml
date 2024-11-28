@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Chi Tiết Hủy Đơn Hàng";
+    Layout = "~/Views/Shared/MyAccount.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h3 class="mb-4">Chi Tiết Hủy Đơn Hàng #123456</h3>
+
+        <!-- Phần 1: Trạng thái và Thời gian Hủy -->
+        <div class="mb-4">
+            <p><strong>Trạng thái:</strong> Đã hủy</p>
+            <p><strong>Thời gian hủy:</strong> 26/11/2024 14:30</p>
+        </div>
+
+        <!-- Phần 2: Chi tiết Sản Phẩm -->
+        <div class="mb-4">
+            <h5>Chi Tiết Sản Phẩm</h5>
+            <div class="card p-3 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center">
+                        <img src="https://via.placeholder.com/80" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Điện thoại Samsung Galaxy S23</h6>
+                        <p><strong>Phân loại:</strong> Màu Đen, 128GB</p>
+                        <p><strong>Số lượng:</strong> 1</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <p>12,990,000 VND</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-3 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center">
+                        <img src="https://via.placeholder.com/80" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Tai nghe Bluetooth Sony WH-1000XM5</h6>
+                        <p><strong>Phân loại:</strong> Màu Xám</p>
+                        <p><strong>Số lượng:</strong> 1</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <p>6,990,000 VND</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phần 3: Lý Do Hủy -->
+        <div class="mb-4">
+            <h5>Lý Do Hủy Đơn Hàng</h5>
+            <p>Sản phẩm không đáp ứng được yêu cầu chất lượng, khách hàng đã quyết định hủy đơn hàng và chọn sản phẩm khác.</p>
+        </div>
+    </div>
+</div>

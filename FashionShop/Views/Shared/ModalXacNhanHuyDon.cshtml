@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<!-- Modal Xác Nhận Hủy -->
+<div class="modal fade" id="cancelConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="cancelConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelConfirmationModalLabel">Xác Nhận Hủy Đơn Hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn chắc chắn muốn hủy đơn hàng này?</p>
+
+                <!-- Lý do hủy đơn -->
+                <div class="form-group">
+                    <label for="cancelReason">Lý do hủy đơn:</label>
+                    <select class="form-control" id="cancelReason" onchange="toggleOtherReason()">
+                        <option value="noNeed">Tôi không có nhu cầu mua nữa</option>
+                        <option value="changeAddress">Tôi muốn đổi địa chỉ</option>
+                        <option value="changeColorSize">Tôi muốn thay đổi màu sắc, kích cỡ</option>
+                        <option value="other">Lý do khác</option>
+                    </select>
+                </div>
+
+                <!-- Lý do khác -->
+                <div class="form-group" id="otherReasonDiv" style="display:none;">
+                    <label for="otherReason">Lý do khác:</label>
+                    <input type="text" class="form-control" id="otherReason" placeholder="Vui lòng điền lý do hủy">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger">Xác Nhận Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleOtherReason() {
+        var cancelReason = document.getElementById('cancelReason').value;
+        var otherReasonDiv = document.getElementById('otherReasonDiv');
+
+        // Nếu chọn "Lý do khác", hiển thị ô nhập lý do
+        if (cancelReason === "other") {
+            otherReasonDiv.style.display = "block";
+        } else {
+            otherReasonDiv.style.display = "none";
+        }
+    }
+</script>

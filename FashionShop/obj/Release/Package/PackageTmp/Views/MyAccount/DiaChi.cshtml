@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "DiaChi";
+    Layout = "~/Views/Shared/MyAccount.cshtml";
+    ViewBag.Account = 1;
+}
+
+<div class="container-fluid">
+    <div class="row align-items-center justify-content-between mb-4">
+        <div class="col-auto">
+            <h5 class="mb-0">Địa chỉ của tôi</h5>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-warning" id="openAddAddressModal" data-toggle="modal" data-target="#addAddressModal">
+                + Thêm địa chỉ mới
+            </button>
+        </div>
+    </div>
+
+    <div class="card p-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="mb-2">
+                    <h6 class="mb-0">
+                        <strong>@ViewBag.Name</strong><span> | @ViewBag.PhoneNumber</span>
+                    </h6>
+                </div>
+                <div class="mb-2">
+                    <p>@ViewBag.Location</p>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateAddressModal">Cập nhật</button>
+            </div>
+            <div class="col-md-2 text-center">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAddressModal">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Thêm Địa Chỉ -->
+<div class="modal fade" id="addAddressModal" tabindex="-1" role="dialog" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAddressModalLabel">Thêm Địa Chỉ Mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Tên</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nhập tên">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Số Điện Thoại</label>
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Nhập số điện thoại">
+                </div>
+                <div class="form-group">
+                    <label for="location">Địa Chỉ</label>
+                    <textarea class="form-control" id="location" rows="3" placeholder="Nhập địa chỉ"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-warning" id="addAddress">Thêm Địa Chỉ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cập Nhật Địa Chỉ -->
+<div class="modal fade" id="updateAddressModal" tabindex="-1" role="dialog" aria-labelledby="updateAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateAddressModalLabel">Cập Nhật Địa Chỉ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="updateName">Tên</label>
+                    <input type="text" class="form-control" id="updateName" value="@ViewBag.Name">
+                </div>
+                <div class="form-group">
+                    <label for="updatePhoneNumber">Số Điện Thoại</label>
+                    <input type="text" class="form-control" id="updatePhoneNumber" value="@ViewBag.PhoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="updateLocation">Địa Chỉ</label>
+                    <textarea class="form-control" id="updateLocation" rows="3">@ViewBag.Location</textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="updateAddress">Cập Nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xác Nhận Xóa -->
+<div class="modal fade" id="deleteAddressModal" tabindex="-1" role="dialog" aria-labelledby="deleteAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAddressModalLabel">Xóa Địa Chỉ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa địa chỉ này không? Thao tác này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>

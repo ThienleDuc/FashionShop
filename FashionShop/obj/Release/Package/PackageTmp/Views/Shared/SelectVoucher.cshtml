@@ -1,0 +1,92 @@
+﻿@{
+    Layout = null;
+}
+
+<!-- Modal chọn hoặc nhập mã -->
+<div class="modal fade" id="discountCodeModal" tabindex="-1" role="dialog" aria-labelledby="discountCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 80%; max-height: 80%; overflow-y: auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="discountCodeModalLabel">Chọn hoặc Nhập mã giảm giá</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Input nhập mã giảm giá -->
+                <div class="form-group">
+                    <label for="discountCodeInput"><strong>Nhập mã giảm giá:</strong></label>
+                    <input type="text" class="form-control" id="discountCodeInput" placeholder="Nhập mã tại đây">
+                </div>
+
+                <!-- Danh sách voucher -->
+                <div class="mt-4">
+                    <h5 class="mb-3">Danh sách mã giảm giá:</h5>
+                    <div class="row">
+                        <!-- Voucher 1 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header text-center bg-primary text-white">
+                                    <h5>Giảm 10%</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Mã:</strong> DISCOUNT10</p>
+                                    <p><strong>Hạn sử dụng:</strong> 31/12/2024</p>
+                                    <p><strong>Điều kiện:</strong> Đơn hàng từ 300,000 VND</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <label>
+                                        <input type="radio" name="voucherCode" value="DISCOUNT10">
+                                        Sử Dụng
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Voucher 2 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header text-center bg-warning text-dark">
+                                    <h5>Giảm 15%</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Mã:</strong> SAVE15</p>
+                                    <p><strong>Hạn sử dụng:</strong> 31/12/2024</p>
+                                    <p><strong>Điều kiện:</strong> Đơn hàng từ 400,000 VND</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <label>
+                                        <input type="radio" name="voucherCode" value="SAVE15">
+                                        Sử Dụng
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Voucher 3 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header text-center bg-danger text-white">
+                                    <h5>Giảm 20%</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Mã:</strong> SAVE20</p>
+                                    <p><strong>Hạn sử dụng:</strong> 31/12/2024</p>
+                                    <p><strong>Điều kiện:</strong> Đơn hàng từ 500,000 VND</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <label>
+                                        <input type="radio" name="voucherCode" value="SAVE20">
+                                        Sử Dụng
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="applyVoucherButton">Áp dụng</button>
+            </div>
+        </div>
+    </div>
+</div>

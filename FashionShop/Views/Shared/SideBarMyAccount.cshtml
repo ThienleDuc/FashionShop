@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+    HttpCookie usernameCookie = Request.Cookies["Username"];
+    var username = usernameCookie != null ? usernameCookie.Value : string.Empty;
+
+}
+
+<div class="p-0 d-flex align-items-center">
+    <div class="p-3">
+        <img src="~/img/product-1.jpg" alt="Avatar" class="rounded rounded-circle border-dark" style="width: 50px; height: 50px; object-fit: cover;">
+    </div>
+    <div class="ml-3">
+        <h6>@username</h6>
+    </div>
+</div>
+
+<nav class="navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0">
+    <div class="navbar-nav w-100 overflow-hidden">
+        <!-- Dropdown Tài khoản của tôi -->
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown">
+                <i class="fa-regular fa-user mr-1" style="color: #205dc5;"></i> Tài khoản của tôi
+            </a>
+            <div class="dropdown-menu w-100 position-relative" aria-labelledby="dropdownAccount">
+                <a class="dropdown-item @Html.Raw(@ViewBag.Title.Equals("HoSo") ? "active" : "")" href="@Url.Action("HoSo", "MyAccount")">Hồ sơ</a>
+                <a class="dropdown-item @Html.Raw(@ViewBag.Title.Equals("NganHang") ? "active" : "")" href="@Url.Action("NganHang", "MyAccount")">Ngân hàng</a>
+                <a class="dropdown-item @Html.Raw(@ViewBag.Title.Equals("DiaChi") ? "active" : "")" href="@Url.Action("DiaChi", "MyAccount")">Địa chỉ</a>
+                <a class="dropdown-item @Html.Raw(@ViewBag.Title.Equals("MatKhau") ? "active" : "")" href="@Url.Action("MatKhau", "MyAccount")">Đổi mật khẩu</a>
+            </div>
+        </div>
+
+        <a href="@Url.Action("order", "Order")" class="nav-item nav-link @Html.Raw(@ViewBag.Title.Equals("Order") ? "active" : "")">
+            <i class="fa-solid fa-list mr-1" style="color: #205dc5;"></i> Đơn mua
+        </a>
+
+        <!-- Dropdown Thông báo -->
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown">
+                <i class="fa-regular fa-bell mr-1" style="color: #e74c3c;"></i> Thông báo
+            </a>
+            <div class="dropdown-menu w-100 position-relative" aria-labelledby="dropdownNotification">
+                <a class="dropdown-item @Html.Raw(@ViewBag.Title.Equals("CapNhatDonHang") ? "active" : "")" href="@Url.Action("CapNhatDonHang", "Notification")">Cập nhật đơn hàng</a>
+            </div>
+        </div>
+
+        <a href="@Url.Action("voucher", "Voucher")" class="nav-item nav-link @Html.Raw(@ViewBag.Title.Equals("Voucher") ? "active" : "")">
+            <i class="fa-solid fa-ticket mr-1" style="color: #e74c3c;"></i> Kho voucher
+        </a>
+    </div>
+</nav>

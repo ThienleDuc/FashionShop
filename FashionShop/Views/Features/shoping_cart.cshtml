@@ -1,0 +1,179 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Shoping cart";
+
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Shopping Cart</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Cart Start -->
+<div class="container-fluid pt-5">
+    <!-- Table Section: Card for Cart Items -->
+    <div class="mb-5">
+        <div class="card border-secondary">
+            <div class="card-body">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>Select</th>
+                            <th>Image</th>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        <tr>
+                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                            <td class="align-middle">Colorful Stylish Shirt</td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                        </tr>
+
+                        <tr>
+                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                            <td class="align-middle">Colorful Stylish Shirt</td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                        </tr>
+
+                        <tr>
+                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                            <td class="align-middle">Colorful Stylish Shirt</td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                        </tr>
+
+                        <tr>
+                            <td class="align-middle"><label><input type="checkbox"><span> Check</span></label></td>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                            <td class="align-middle">Colorful Stylish Shirt</td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                        <!-- Repeat similar rows for other products -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Summary Section: Gộp thành 1 card và chia 2 cột -->
+    <div class="mb-5">
+        <div class="card border-secondary sticky-card" id="cartSummaryCard">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Cột 1: Quản lý sản phẩm (Chọn tất cả và Xóa) -->
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <input type="checkbox" id="selectAll" class="mr-2">
+                                <label for="selectAll" class="mb-0">Chọn tất cả</label>
+                            </div>
+                            <!-- Nút "Xóa" - không có nền và border -->
+                            <button class="btn btn-link btn-sm">Xóa</button>
+
+                            <!-- Nút "Chọn hoặc nhập mã" - màu xanh dương đậm, không có nền và border -->
+                            <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#discountCodeModal" style="color: #0056b3; border: none;">Chọn hoặc nhập mã</button>
+                        </div>
+                    </div>
+
+                    <!-- Cột 2: Tóm tắt giỏ hàng (Tổng tiền và Mua hàng) -->
+                    <div class="col-md-6 mb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="mb-1 text-right">Tổng tiền thanh toán: <strong>$160</strong></p>
+                                <p class="mb-0 text-right">Số tiền tiết kiệm: <strong>$20</strong></p>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success btn-block py-2" onclick="window.location.href='@Url.Action("Checkout", "Features")'">Mua hàng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @Html.Partial("SelectVoucher")
+</div>
+<!-- Cart End -->

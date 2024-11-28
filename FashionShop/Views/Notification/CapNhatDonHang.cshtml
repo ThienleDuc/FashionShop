@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "CapNhatDonHang";
+    Layout = "~/Views/Shared/MyAccount.cshtml";
+    ViewBag.Account = 2;
+
+}
+
+<div class="container ">
+    <div class="card p-4 shadow-sm">
+        <!-- Phần đầu: Ảnh -->
+        <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+                <!-- Ảnh cố định kích thước 100x100 -->
+                <img src="https://via.placeholder.com/100" alt="Ảnh thông báo" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+            </div>
+            <div class="col-8">
+                <!-- Phần giữa: Tiêu đề, Mô tả, Thời gian -->
+                <h5 class="mb-1 text-truncate">Thông báo 1</h5>
+                <p class="text-muted text-wrap mb-0">Đây là nội dung của thông báo 1. Nội dung dài sẽ tự động xuống dòng.</p>
+                <p class="w-100 d-block text-left mt-1" style="color: #c0392b; font-size: 0.85rem;">27/11/2024 09:39</p>
+            </div>
+            <div class="col-md-2">
+                <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark border">
+                    Xem chi tiết
+                </a>            
+            </div>
+        </div>
+    </div>
+</div>

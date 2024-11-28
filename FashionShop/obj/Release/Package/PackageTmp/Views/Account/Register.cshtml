@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_layout2.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Đăng Ký Tài Khoản</h2>
+                    <div id="errorMessage" class="alert alert-danger" hidden>
+                        <div class="row align-items-center">
+                            <!-- Phần chứa icon -->
+                            <div class="col-auto">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </div>
+                            <!-- Phần chứa thông báo lỗi -->
+                            <div class="col">
+                                <span class="error-message">
+                                    <!-- Thông báo lỗi sẽ được chèn vào đây -->
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="registerForm" data-action-url="@Url.Action("Register", "Account")">
+                        <!-- Tên đệm và Tên -->
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Tên đệm">
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Tên">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ngày tháng năm sinh -->
+                        <div class="mb-3">
+                            <label for="dateOfBirth" class="form-label">Ngày Sinh</label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <select class="form-control rounded-lg" id="day" name="day">
+                                        <option value="" disabled selected>Ngày</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control rounded-lg" id="month" name="month">
+                                        <option value="" disabled selected>Tháng</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control rounded-lg" id="year" name="year">
+                                        <option value="" disabled selected>Năm</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Giới tính -->
+                        <div class="mb-3">
+                            <label class="form-label">Giới tính</label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="genderMale" name="gender" value="Nam">
+                                        <label class="form-check-label" for="genderMale">Nam</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="genderFemale" name="gender" value="Nữ">
+                                        <label class="form-check-label" for="genderFemale">Nữ</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="genderOther" name="gender" value="Khác">
+                                        <label class="form-check-label" for="genderOther">Khác</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tên đăng nhập -->
+                        <div class="mb-3">
+                            <input type="text" class="form-control rounded-lg" id="username" name="username" placeholder="Tên đăng nhập">
+                        </div>
+
+                        <!-- Mật khẩu -->
+                        <div class="mb-3">
+                            <input type="password" class="form-control rounded-lg" id="password" name="password" placeholder="Mật Khẩu">
+                        </div>
+
+                        <!-- Nhập lại mật khẩu -->
+                        <div class="mb-3">
+                            <input type="password" class="form-control rounded-lg" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu">
+                        </div>
+
+                        <!-- Nút đăng ký -->
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary w-100" id="btnRegister" data-redirect-url="@Url.Action("Login", "Account")">Đăng Ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

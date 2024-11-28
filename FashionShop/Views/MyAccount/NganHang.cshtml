@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "NganHang";
+    Layout = "~/Views/Shared/MyAccount.cshtml";
+    ViewBag.Account = 1;
+}
+
+<div class="container-fluid">
+    <div class="row align-items-center justify-content-between mb-4">
+        <div class="col-auto">
+            <h5 class="mb-0">Tài khoản ngân hàng của tôi</h5>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-success" id="openAddBankModal" data-toggle="modal" data-target="#addBankModal">
+                + Thêm tài khoản ngân hàng
+            </button>
+        </div>
+    </div>
+
+    <div class="card p-4">
+        <div class="row align-items-center">
+            <!-- Cột ảnh với kích thước cố định 100x100 -->
+            <div class="col-md-2 text-center">
+                <div style="width: 80px; height: 80px;">
+                    <img src="https://via.placeholder.com/100" alt="Bank Logo" class="w-100 h-100" style="object-fit: cover;" />
+                </div>
+            </div>
+
+            <!-- Cột thông tin ngân hàng -->
+            <div class="col-8">
+                <div class="mb-2">
+                    <h6 class="mb-0"><strong>@ViewBag.BankName</strong></h6>
+                </div>
+                <div class="mb-2">
+                    <span>Chủ sở hữu:</span> <strong>@ViewBag.OwnerName</strong>
+                </div>
+                <div class="mb-2">
+                    <span>Chi nhánh:</span> <strong>@ViewBag.Branch</strong>
+                </div>
+            </div>
+
+            <!-- Cột nút xóa -->
+            <div class="col-md-2 text-center">
+                <button type="button" class="btn btn-danger" id="openConfirmDelete" data-toggle="modal" data-target="#deleteBankModal">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addBankModal" tabindex="-1" role="dialog" aria-labelledby="addBankModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addBankModalLabel">Thêm Tài Khoản Ngân Hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="bankName">Tên Ngân Hàng</label>
+                    <input type="text" class="form-control" id="bankName">
+                </div>
+                <div class="form-group">
+                    <label for="ownerName">Tên Chủ Sở Hữu</label>
+                    <input type="text" class="form-control" id="ownerName">
+                </div>
+                <div class="form-group">
+                    <label for="accountNumber">Số Tài Khoản</label>
+                    <input type="text" class="form-control" id="accountNumber">
+                </div>
+                <div class="form-group">
+                    <label for="branch">Chi Nhánh</label>
+                    <input type="text" class="form-control" id="branch">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" id="addBankAccount">Thêm Tài Khoản</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal xác nhận xóa -->
+<div class="modal fade" id="deleteBankModal" tabindex="-1" role="dialog" aria-labelledby="deleteBankModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteBankModalLabel">Xác nhận xóa tài khoản ngân hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa tài khoản ngân hàng này không? Thao tác này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
