@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace FashionShop.Models
 {
-    public class DatabaseHelper
+    public class ConnectionDatabase
     {
         // Chuỗi kết nối
         private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;

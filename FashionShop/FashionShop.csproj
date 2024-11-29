@@ -154,8 +154,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatabaseHelper.cs" />
+    <Compile Include="Models\ConnectionDatabase.cs" />
     <Compile Include="Models\LeDucThien\Entity\ent_AccountUser.cs" />
+    <Compile Include="Models\LeDucThien\ProcessData\pd_AccountUser.cs" />
+    <Compile Include="Models\OtherMethods\CookieHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -361,7 +363,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
     <Folder Include="Models\DangNgocDung\" />
-    <Folder Include="Models\LeDucThien\DbContext\" />
     <Folder Include="Models\LeMinhToan\" />
     <Folder Include="Models\TranNguyenNhatThong\" />
     <Folder Include="Models\TranPhuocLoc\" />
@@ -374,6 +375,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
