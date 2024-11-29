@@ -16,7 +16,7 @@
 </div>
 <!-- Page Header End -->
 
-<div class="container-fluid pt-5">
+<div class="container-fluid px-xl-5">
     <div class="card p-4 mb-4">
         <h5 class="mb-4"><i class="fa-solid fa-location-dot" style="color: #ce1c1c;"></i> Địa chỉ nhận hàng</h5>
         <div class="row align-items-center">
@@ -152,7 +152,7 @@
 
     <div class="row mb-4">
         <div class="col-md-7">
-            <div class="card p-4">
+            <div class="card p-4 shadow-sm">
                 <div class="row align-items-center">
                     <!-- Cột ảnh với kích thước cố định 100x100 -->
                     <div class="col-md-2 text-center">
@@ -222,17 +222,23 @@
         <div class="col-md-6">
             <div class="card p-4 h-100">
                 <h5 class="mb-4">Mã giảm giá</h5>
+                <!-- Nút chọn hoặc nhập mã -->
+                <div class="mb-2">
+                    <button class="btn btn-link btn-sm p-0" data-toggle="modal" data-target="#discountCodeModal" style="color: #0056b3; border: none;">Chọn hoặc nhập mã</button>
+                </div>
                 <div class="row">
-                    <!-- Nút chọn hoặc nhập mã -->
+                    <!-- Ô mã voucher -->
                     <div class="col-md-6">
-                        <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#discountCodeModal" style="color: #0056b3; border: none;">Chọn hoặc nhập mã</button>
+                        <div class="form-group">
+                            <label for="idVoucher">Mã voucher</label>
+                            <input type="text" class="form-control" id="idVoucher" readonly>
+                        </div>
                     </div>
-
                     <!-- Ô nhập số tiền giảm -->
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="discountAmount">Số tiền giảm</label>
-                            <input type="text" class="form-control" id="discountAmount" readonly placeholder="0">
+                            <input type="text" class="form-control" id="discountAmount" readonly>
                         </div>
                     </div>
                 </div>
@@ -326,7 +332,9 @@
                 <div class="mb-3 d-flex justify-content-between">
                     Tổng tiền đơn hàng: <strong>$330</strong>
                 </div>
-                <button class="btn btn-success btn-block py-2" onclick="placeOrder()">Đặt hàng</button>
+                <button class="btn btn-success btn-block py-2" id="OrderProduct" data-toggle="modal" data-target="#orderStatusModal" data-redirect-url="@Url.Action("Index", "Home")">
+                    Đặt hàng
+                </button>
             </div>
         </div>
     </div>
@@ -335,17 +343,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="orderStatusModalLabel">Trạng thái đặt hàng</h5>
+                    <h5 class="modal-title" id="orderStatusTitle">Tiêu đề</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center">
-                    <!-- Thông báo trạng thái -->
-                    <h5 id="orderMessage" class="text-success">Đặt hàng thành công!</h5>
+                <div class="modal-body">
+                    <p id="orderStatusDescription">Mô tả</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    <button type="button" id="orderModalOk" class="btn btn-primary" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -360,37 +367,15 @@
     }
 
     .payment-option {
-        border: 1px solid #ccc; /* Thêm đường viền */
-        border-radius: 5px; /* Bo tròn các góc */
-        padding: 10px; /* Thêm khoảng cách bên trong */
-        margin: 0; /* Bỏ khoảng cách mặc định giữa các phần tử */
-        width: 48%; /* Mỗi lựa chọn chiếm khoảng 50% chiều rộng */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px; 
+        margin: 0;
+        width: 48%; 
     }
 
         .payment-option input[type="radio"] {
-            margin-right: 10px; /* Khoảng cách giữa radio button và nhãn */
+            margin-right: 10px;
         }
 </style>
 
-<script>
-    // Lưu ý: đây chỉ là giả sử thôi. vui lòng sử dụng chatGPT hay bất cứ thứ j để hoành thành công việc
-    function placeOrder() {
-        // Giả lập kết quả đặt hàng (thành công hoặc thất bại)
-        const isSuccess = Math.random() > 0.5;
-
-        // Cập nhật nội dung thông báo
-        const orderMessage = document.getElementById('orderMessage');
-        if (isSuccess) {
-            orderMessage.textContent = 'Đặt hàng thành công!';
-            orderMessage.classList.remove('text-danger');
-            orderMessage.classList.add('text-success');
-        } else {
-            orderMessage.textContent = 'Đặt hàng thất bại. Vui lòng thử lại.';
-            orderMessage.classList.remove('text-success');
-            orderMessage.classList.add('text-danger');
-        }
-
-        // Hiển thị modal
-        $('#orderStatusModal').modal('show');
-    }
-</script>

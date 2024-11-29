@@ -18,42 +18,89 @@
         <div class="tab-content">
             <!-- Tab Chờ xác nhận -->
             <div class="tab-pane fade show active" id="tab-pane-1">
-                <div class="card p-3 mb-3">
-                    <div class="row align-items-center">
-                        <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
-                        <div class="col-md-2 text-center">
-                            <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
-                        </div>
-
-                        <!-- Cột thông tin sản phẩm -->
-                        <div class="col-md-8">
+                <div class="mb-4 card shadow-sm">
+                    <div class="card-body">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Tên sản phẩm</h5>
-                                <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
-                                <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
 
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Cột giá tiền -->
-                        <div class="col-md-2 text-center">
-                            <p class="card-text"><del>600,000</del> 500,000 VND</p>
-                        </div>
-                    </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
 
-                    <!-- Phần Thành Tiền và Nút Mua lại -->
-                    <div class="d-flex flex-column justify-content-between align-items-end mt-3">
-                        <!-- Hàng 1: Thành tiền (căn phải) -->
-                        <div class="mb-2 text-end">
-                            <p class="card-text">500,000 VND</p>
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
-                        <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                            <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                <i class="fas fa-eye text-primary"></i> View
-                            </a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#cancelConfirmationModal">Xác Nhận Hủy</button>
+                        <!-- Phần Thành Tiền và Nút Mua lại -->
+                        <div class="d-flex flex-column justify-content-between align-items-end mt-3">
+                            <!-- Hàng 1: Thành tiền (căn phải) -->
+                            <div class="mb-2 text-end">
+                                <p class="card-text">500,000 VND</p>
+                            </div>
+
+                            <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
+                            <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
+                                @if (@ViewBag.TrangThai == "Hoàn thành")
+                                {
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+                                }
+                                else if (@ViewBag.TrangThai == "Chờ xác nhận")
+                                {
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#cancelConfirmationModal">Xác Nhận Hủy</button>
+                                }
+                                else
+                                {
+                                    <!-- Trạng thái khác không hiển thị nút -->
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -61,30 +108,66 @@
 
             <!-- Tab Vận chuyển -->
             <div class="tab-pane fade" id="tab-pane-2">
-                <div class="card p-3 mb-3">
-                    <div class="row align-items-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
-                        </div>
-                        <div class="col-md-8">
+                <div class="mb-4 card shadow-sm">
+                    <div class="card-body">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Tên sản phẩm</h5>
-                                <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
-                                <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2 text-center">
-                            <p class="card-text"><del>600,000</del> 500,000 VND</p>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-end mt-3">
-                        <div class="mb-2 text-end">
-                            <p class="card-text">500,000 VND</p>
-                        </div>
-                        <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                            <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                <i class="fas fa-eye text-primary"></i> View
-                            </a>
+
+                                       <!-- Phần Thành Tiền và Nút Mua lại -->
+                        <div class="d-flex flex-column justify-content-between align-items-end mt-3">
+                            <!-- Hàng 1: Thành tiền (căn phải) -->
+                            <div class="mb-2 text-end">
+                                <p class="card-text">500,000 VND</p>
+                            </div>
+
+                            <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
+                            <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
+                                @if (@ViewBag.TrangThai == "Hoàn thành")
+                                {
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+                                }
+                                else if (@ViewBag.TrangThai == "Chờ xác nhận")
+                                {
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#cancelConfirmationModal">Xác Nhận Hủy</button>
+                                }
+                                else
+                                {
+                                    <!-- Trạng thái khác không hiển thị nút -->
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,30 +175,89 @@
 
             <!-- Tab Chờ giao hàng -->
             <div class="tab-pane fade" id="tab-pane-3">
-                <div class="card p-3 mb-3">
-                    <div class="row align-items-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
-                        </div>
-                        <div class="col-md-8">
+                <div class="mb-4 card shadow-sm">
+                    <div class="card-body">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Tên sản phẩm</h5>
-                                <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
-                                <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2 text-center">
-                            <p class="card-text"><del>600,000</del> 500,000 VND</p>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-end mt-3">
-                        <div class="mb-2 text-end">
-                            <p class="card-text">500,000 VND</p>
-                        </div>
-                        <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                            <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                <i class="fas fa-eye text-primary"></i> View
-                            </a>
+
+                        <!-- Phần Thành Tiền và Nút Mua lại -->
+                        <div class="d-flex flex-column justify-content-between align-items-end mt-3">
+                            <!-- Hàng 1: Thành tiền (căn phải) -->
+                            <div class="mb-2 text-end">
+                                <p class="card-text">500,000 VND</p>
+                            </div>
+
+                            <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
+                            <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
+                                @if (@ViewBag.TrangThai == "Hoàn thành")
+                                {
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+                                }
+                                else if (@ViewBag.TrangThai == "Chờ xác nhận")
+                                {
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#cancelConfirmationModal">Xác Nhận Hủy</button>
+                                }
+                                else
+                                {
+                                    <!-- Trạng thái khác không hiển thị nút -->
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,31 +265,89 @@
 
             <!-- Tab Hoàn thành -->
             <div class="tab-pane fade" id="tab-pane-4">
-                <div class="card p-3 mb-3">
-                    <div class="row align-items-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
-                        </div>
-                        <div class="col-md-8">
+                <div class="mb-4 card">
+                    <div class="card-body">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Tên sản phẩm</h5>
-                                <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
-                                <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2 text-center">
-                            <p class="card-text"><del>600,000</del> 500,000 VND</p>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-end mt-3">
-                        <div class="mb-2 text-end">
-                            <p class="card-text">500,000 VND</p>
-                        </div>
-                        <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                            <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                <i class="fas fa-eye text-primary"></i> View
-                            </a>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+
+                        <!-- Phần Thành Tiền và Nút Mua lại -->
+                        <div class="d-flex flex-column justify-content-between align-items-end mt-3">
+                            <!-- Hàng 1: Thành tiền (căn phải) -->
+                            <div class="mb-2 text-end">
+                                <p class="card-text">500,000 VND</p>
+                            </div>
+
+                            <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
+                            <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
+                                @if (@ViewBag.TrangThai == "Hoàn thành")
+                                {
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+                                }
+                                else if (@ViewBag.TrangThai == "Chờ xác nhận")
+                                {
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#cancelConfirmationModal">Xác Nhận Hủy</button>
+                                }
+                                else
+                                {
+                                    <!-- Trạng thái khác không hiển thị nút -->
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,31 +355,89 @@
 
             <!-- Tab Đã hủy -->
             <div class="tab-pane fade" id="tab-pane-5">
-                <div class="card p-3 mb-3">
-                    <div class="row align-items-center">
-                        <div class="col-md-2 text-center">
-                            <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
-                        </div>
-                        <div class="col-md-8">
+                <div class="mb-4 card">
+                    <div class="card-body">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Tên sản phẩm</h5>
-                                <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
-                                <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2 text-center">
-                            <p class="card-text"><del>600,000</del> 500,000 VND</p>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <!-- Cột ảnh sản phẩm với kích thước cố định 100x100 -->
+                                    <div class="col-md-2 text-center">
+                                        <img src="https://via.placeholder.com/150" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+
+                                    <!-- Cột thông tin sản phẩm -->
+                                    <div class="col-md-7">
+                                        <h6 class="card-title mb-2"><strong>Tên sản phẩm</strong></h6>
+                                        <p class="card-text mb-1"><strong>Phân loại:</strong> Đỏ</p>
+                                        <p class="card-text mb-1"><strong>Số lượng :</strong> 1</p>
+                                    </div>
+
+                                    <!-- Cột giá tiền -->
+                                    <div class="col-md-3 text-center">
+                                        <p class="card-text"><del>600,000</del> 500,000 VND</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex flex-column justify-content-between align-items-end mt-3">
-                        <div class="mb-2 text-end">
-                            <p class="card-text">500,000 VND</p>
-                        </div>
-                        <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                            <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
-                                <i class="fas fa-eye text-primary"></i> View
-                            </a>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+
+                        <!-- Phần Thành Tiền và Nút Mua lại -->
+                        <div class="d-flex flex-column justify-content-between align-items-end mt-3">
+                            <!-- Hàng 1: Thành tiền (căn phải) -->
+                            <div class="mb-2 text-end">
+                                <p class="card-text">500,000 VND</p>
+                            </div>
+
+                            <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
+                            <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
+                                @if (@ViewBag.TrangThai == "Hoàn thành")
+                                {
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+                                }
+                                else if (@ViewBag.TrangThai == "Chờ xác nhận")
+                                {
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#cancelConfirmationModal">Xác Nhận Hủy</button>
+                                }
+                                else
+                                {
+                                    <!-- Trạng thái khác không hiển thị nút -->
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

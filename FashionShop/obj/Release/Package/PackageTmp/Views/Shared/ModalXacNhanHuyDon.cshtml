@@ -51,16 +51,3 @@
     </div>
 </div>
 
-<script>
-    // Lắng nghe sự kiện thay đổi khi chọn radio button
-    document.getElementsByName('cancelReason').forEach(function (radioButton) {
-        radioButton.addEventListener('change', function () {
-            var otherReasonDiv = document.getElementById('otherReasonDiv');
-            if (this.value === 'other') {
-                otherReasonDiv.style.display = 'block'; // Hiển thị ô nhập lý do nếu chọn "Lý do khác"
-            } else {
-                otherReasonDiv.style.display = 'none'; // Ẩn ô nhập lý do nếu chọn các lý do khác
-            }
-        });
-    });
-</script>

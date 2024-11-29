@@ -11,6 +11,7 @@ namespace FashionShop.Controllers
         // GET: Order
         public ActionResult order()
         {
+            ViewBag.TrangThai = "Hoàn thành";
             return View();
         }
 

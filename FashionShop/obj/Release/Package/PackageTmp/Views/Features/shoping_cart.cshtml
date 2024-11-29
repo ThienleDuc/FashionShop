@@ -16,7 +16,7 @@
 </div>
 <!-- Page Header End -->
 <!-- Cart Start -->
-<div class="container-fluid pt-5">
+<div class="container-fluid px-xl-5">
     <div class="mb-5">
         <div class="card border-secondary">
             <div class="card-body">
@@ -63,6 +63,63 @@
                             <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                         </tr>
 
+                        <tr>
+                            <td class="align-middle">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input product-checkbox" id="product-2" name="product">
+                                    <label class="custom-control-label" for="product-2">Chọn</label>
+                                </div>
+                            </td>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                            <td class="align-middle">Colorful Stylish Shirt</td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                        </tr>
+
+                        <tr>
+                            <td class="align-middle">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input product-checkbox" id="product-3" name="product">
+                                    <label class="custom-control-label" for="product-3">Chọn</label>
+                                </div>
+                            </td>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                            <td class="align-middle">Colorful Stylish Shirt</td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">$150</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                        </tr>
                         <!-- Repeat similar rows for other products -->
                     </tbody>
                 </table>
@@ -102,7 +159,7 @@
                                 <p class="mb-0 text-right">Số tiền tiết kiệm: <strong>$20</strong></p>
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-success btn-block py-2" id="OrderProduct">Mua hàng</button>
+                                <button class="btn btn-success btn-block py-2" id="purchase" data-redirect-url="@Url.Action("Checkout", "Features")">Mua hàng</button>
                             </div>
                         </div>
                     </div>
@@ -135,35 +192,3 @@
     @Html.Partial("SelectVoucher")
 </div>
 <!-- Cart End -->
-
-<script>
-    // Lắng nghe sự kiện khi checkbox "Chọn tất cả" thay đổi
-    document.getElementById("selectAll").addEventListener("change", function () {
-        // Lấy tất cả các checkbox sản phẩm
-        var checkboxes = document.querySelectorAll(".product-checkbox");
-
-        // Lặp qua tất cả checkbox và thay đổi trạng thái tương ứng với checkbox "Chọn tất cả"
-        checkboxes.forEach(function (checkbox) {
-            checkbox.checked = document.getElementById("selectAll").checked;
-        });
-    });
-
-    // Lắng nghe sự kiện khi một sản phẩm nào đó được chọn hoặc bỏ chọn
-    var productCheckboxes = document.querySelectorAll(".product-checkbox");
-    productCheckboxes.forEach(function (checkbox) {
-        checkbox.addEventListener("change", function () {
-            // Kiểm tra xem có tất cả các checkbox được chọn không
-            var allChecked = true;
-            productCheckboxes.forEach(function (checkbox) {
-                if (!checkbox.checked) {
-                    allChecked = false;
-                }
-            });
-
-            // Nếu tất cả các checkbox được chọn, đặt checkbox "Chọn tất cả" thành checked
-            document.getElementById("selectAll").checked = allChecked;
-        });
-    });
-
-
-</script>

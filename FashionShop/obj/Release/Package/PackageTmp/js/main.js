@@ -273,6 +273,149 @@
         }
     });
 
+    $(document).ready(function () {
+        // Lắng nghe sự kiện thay đổi khi chọn radio button
+        $('input[name="cancelReason"]').on('change', function () {
+            var otherReasonDiv = $('#otherReasonDiv');
+            if ($(this).val() === 'other') {
+                otherReasonDiv.show();
+            } else {
+                otherReasonDiv.hide();
+            }
+        });
+    });
+
+
+    $(document).ready(function () {
+        // Lắng nghe sự kiện khi checkbox "Chọn tất cả" thay đổi
+        $('#selectAll').on('change', function () {
+            // Lấy tất cả các checkbox sản phẩm
+            var checkboxes = $('.product-checkbox');
+
+            // Lặp qua tất cả checkbox và thay đổi trạng thái tương ứng với checkbox "Chọn tất cả"
+            checkboxes.each(function () {
+                $(this).prop('checked', $('#selectAll').prop('checked'));
+            });
+        });
+
+        // Lắng nghe sự kiện khi một sản phẩm nào đó được chọn hoặc bỏ chọn
+        $('.product-checkbox').on('change', function () {
+            // Kiểm tra xem có tất cả các checkbox được chọn không
+            var allChecked = true;
+            $('.product-checkbox').each(function () {
+                if (!$(this).prop('checked')) {
+                    allChecked = false;
+                }
+            });
+
+            // Nếu tất cả các checkbox được chọn, đặt checkbox "Chọn tất cả" thành checked
+            $('#selectAll').prop('checked', allChecked);
+        });
+    });
+
+    $(document).ready(function () {
+
+        // function thêm sản phẩm vào trong giỏ hàng
+        // Thêm vào các tham số đầu vào
+        function AddToCart () {
+
+        }
+
+        // Hiển thị thông tin từ sản phẩm được chọn lên trang thanh toán
+        // Thêm vào các tham số đầu vào
+        function LoadCheckout() {
+
+        }
+
+        // Xử lý khi click vào nút thêm vào giỏ hàng trong product detail
+        $('#AddToCart').on('click', function () {
+            AddToCart();
+        });
+
+        // Xử lý khi click vào nút  mua hàng trong product detail
+        $('#CartAndPurchase').on('click', function () {
+            // Gọi lại để thêm vào giỏ hàng
+            AddToCart();
+
+            // xử lý hiển thị thông tin cho trang khi click vào
+
+            // Checked vào sản phẩm vừa thêm vào
+
+            // Hiển thị thông tin từ sản phẩm được chọn lên trang thanh toán
+            LoadCheckout();
+
+            // Lấy URL từ thuộc tính data-redirect-url của nút
+            var redirectUrl = $(this).data('redirect-url');
+
+            // Chuyển hướng người dùng đến trang Checkout
+            window.location.href = redirectUrl;
+        });
+
+        // Xử lý khi click vào nút mua hàng trong shoping cart
+        $('#purchase').on('click', function () {
+
+            // xử lý hiển thị thông tin cho trang đặt hàng khi click vào
+            LoadCheckout();
+
+            // Lấy URL từ thuộc tính data-redirect-url của nút
+            var redirectUrl = $(this).data('redirect-url');
+
+            // Chuyển hướng người dùng đến trang Checkout
+            window.location.href = redirectUrl;
+        });
+    });
+
+    // Xử lý khi click vào nút đặt hàng
+    $(document).ready(function () {
+        $('#orderStatusModal').on('show.bs.modal', function () {
+            // Giả lập kiểm tra thông tin đặt hàng
+            const isSuccess = Math.random() > 0.5;
+
+            // Đặt tiêu đề và mô tả cho modal
+            if (isSuccess) {
+                $('#orderStatusTitle').text('Thành công');
+                $('#orderStatusDescription').text('Bạn đã đặt hàng thành công. Sau khi bấm OK, bạn sẽ được chuyển về trang chủ.');
+            } else {
+                $('#orderStatusTitle').text('Thất bại');
+                $('#orderStatusDescription').text('Đặt hàng thất bại. Vui lòng kiểm tra thông tin và thử lại.');
+            }
+        });
+
+        $('#orderModalOk').on('click', function () {
+            const title = $('#orderStatusTitle').text();
+            if (title === 'Thành công') {
+                var redirectUrl = $('#OrderProduct').data('redirect-url');
+                // Chuyển về trang chủ nếu thành công
+                window.location.href = redirectUrl;
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        // Số lượng sản phẩm giả định (có thể lấy từ API hoặc dữ liệu sản phẩm)
+        var availableQuantity = 12; // Thay đổi theo số lượng thực tế
+
+        // Kiểm tra ngay khi tải trang nếu sản phẩm có sẵn hay không
+        if (availableQuantity === 0) {
+            $('#errorMessage .error-message').text("Hiện đang hết hàng!").show();
+            $('#errorMessage').removeAttr('hidden');  // Hiển thị thông báo
+            $('#AddToCart').prop('disabled', true);
+            $('#CartAndPurchase').prop('disabled', true);
+        }
+
+
+        // Lắng nghe sự kiện khi thay đổi giá trị số lượng
+        $('#productQuantity').on('input', function () {
+            var requestedQuantity = parseInt($(this).val());
+
+            // Kiểm tra nếu số lượng yêu cầu lớn hơn số lượng có sẵn
+            if (requestedQuantity > availableQuantity) {
+                    
+                return;  
+            }
+        });
+    });
+
 
 })(jQuery);
 

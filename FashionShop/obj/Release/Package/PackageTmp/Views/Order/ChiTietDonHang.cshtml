@@ -12,12 +12,16 @@
         <div class="mb-4">
             <p><strong>Trạng thái:</strong> @ViewBag.TrangThai</p>
             <p><strong>Thời gian:</strong> 27/11/2024 6:50</p>
+            <p><strong>Thời gian dự kiến nhận Hàng:</strong> Từ "30/11/2024" đến "1/12/2014" <small>(khoảng 3 đến 5 ngày)</small></p>
+
         </div>
 
         <div class="d-flex justify-content-between mb-4">
             @if (@ViewBag.TrangThai == "Hoàn thành")
             {
-                <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
+                <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">
+                    Mua Lại
+                </button>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">Đánh Giá</button>
             }
             else if (@ViewBag.TrangThai == "Chờ xác nhận")
@@ -47,10 +51,10 @@
                 <h6>Chi Tiết Sản Phẩm</h6>
                 <div class="card p-3 mb-3">
                     <div class="row align-items-center">
-                        <div class="col-md-3 text-center">
+                        <div class="col-md-2 text-center">
                             <img src="https://via.placeholder.com/80" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <h6>Sản phẩm A</h6>
                             <p><strong>Phân loại:</strong> Màu đỏ</p>
                             <p><strong>Số lượng:</strong> 2</p>
@@ -62,10 +66,10 @@
                 </div>
                 <div class="card p-3 mb-3">
                     <div class="row align-items-center">
-                        <div class="col-md-3 text-center">
+                        <div class="col-md-2 text-center">
                             <img src="https://via.placeholder.com/80" class="img-fluid rounded" alt="Ảnh sản phẩm" style="width: 80px; height: 80px; object-fit: cover;">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <h6>Sản phẩm B</h6>
                             <p><strong>Phân loại:</strong> Màu xanh</p>
                             <p><strong>Số lượng:</strong> 1</p>
