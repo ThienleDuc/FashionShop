@@ -4,82 +4,70 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FashionShop.Models.LeDucThien.Entity;
+using FashionShop.Models.LeDucThien.ProcessData;
+using FashionShop.Models.OtherMethods;
 
 namespace FashionShop.Controllers
 {
     public class AccountController : Controller
     {
+        private pd_AccountUser accountUserProcess = new pd_AccountUser();
 
+        // Phương thức đăng nhập
         [HttpPost]
         public JsonResult Login(string username, string password)
         {
-            // Kiểm tra thông tin đăng nhập (ví dụ với tài khoản admin)
-            if (username == "admin" && password == "admin12345") // Đăng nhập thành công
+            // Kiểm tra thông tin đăng nhập
+            var accountUsers = accountUserProcess.GetAccountUsers();
+            var user = accountUsers.FirstOrDefault(u => u.Username == username && u.Password == password);
+
+            if (user != null) // Đăng nhập thành công
             {
-                // Lưu trạng thái đăng nhập vào cookie
-                HttpCookie loginCookie = new HttpCookie("IsLoggedIn", "true");
-                loginCookie.Expires = DateTime.Now.AddYears(1); // Thiết lập cookie hết hạn sau 1 năm
-                Response.Cookies.Add(loginCookie);
+                // Lưu trạng thái đăng nhập và tên người dùng vào cookie
+                CookieHelper.SetLoginCookies(username);
 
-                // Lưu tên người dùng vào cookie
-                HttpCookie usernameCookie = new HttpCookie("Username", username);
-                usernameCookie.Expires = DateTime.Now.AddYears(1); // Thiết lập cookie hết hạn sau 1 năm
-                Response.Cookies.Add(usernameCookie);
-
-                // Trả về kết quả thành công
                 return Json(new { success = true });
             }
             else
             {
-                // Nếu đăng nhập không hợp lệ
+                // Nếu thông tin đăng nhập không hợp lệ
                 return Json(new { success = false });
             }
         }
 
+        // Trang đăng nhập
         public ActionResult Login()
         {
             return View();
         }
 
+        // Phương thức đăng xuất
         public ActionResult Logout()
         {
             // Xóa cookie khi người dùng đăng xuất
-            HttpCookie loginCookie = new HttpCookie("IsLoggedIn");
-            loginCookie.Expires = DateTime.Now.AddDays(-1); // Đặt thời gian hết hạn của cookie về quá khứ
-            Response.Cookies.Add(loginCookie);
+            CookieHelper.ClearLoginCookies();
 
-            HttpCookie usernameCookie = new HttpCookie("Username");
-            usernameCookie.Expires = DateTime.Now.AddDays(-1); // Xóa cookie tên người dùng
-            Response.Cookies.Add(usernameCookie);
-
-            return RedirectToAction("Index", "Home"); // Chuyển hướng về trang chủ
+            return RedirectToAction("Index", "Home");
         }
 
+        // Phương thức đăng ký
         [HttpPost]
         public JsonResult Register(string username, string password)
         {
-            // Kiểm tra thông tin đăng ký (ví dụ kiểm tra với tài khoản admin, bạn có thể mở rộng logic này)
-            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password)) // Đảm bảo username và password không rỗng
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password)) // Đảm bảo thông tin không rỗng
             {
-                // Lưu thông tin đăng ký vào cookie (có thể mã hóa mật khẩu nếu cần thiết)
-                HttpCookie usernameCookie = new HttpCookie("Username", username);
-                usernameCookie.Expires = DateTime.Now.AddYears(1); // Thiết lập cookie hết hạn sau 1 năm
-                Response.Cookies.Add(usernameCookie);
+                // Lưu thông tin đăng ký vào cookie thông qua CookieHelper
+                CookieHelper.SetRegisterCookies(username, password);
 
-                HttpCookie passwordCookie = new HttpCookie("Password", password); // Lưu password (không an toàn trong thực tế)
-                passwordCookie.Expires = DateTime.Now.AddYears(1); // Thiết lập cookie hết hạn sau 1 năm
-                Response.Cookies.Add(passwordCookie);
-
-                // Trả về kết quả thành công
                 return Json(new { success = true });
             }
             else
             {
-                // Nếu thông tin không hợp lệ
                 return Json(new { success = false });
             }
         }
 
+        // Trang đăng ký
         public ActionResult Register()
         {
             return View();
