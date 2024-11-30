@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_layout2.cshtml";
 }
@@ -10,29 +9,24 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="text-center mb-4">Đăng Ký Tài Khoản</h2>
-                    <div id="errorMessage" class="alert alert-danger" hidden>
-                        <div class="row align-items-center">
-                            <!-- Phần chứa icon -->
-                            <div class="col-auto">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </div>
-                            <!-- Phần chứa thông báo lỗi -->
-                            <div class="col">
-                                <span class="error-message">
-                                    <!-- Thông báo lỗi sẽ được chèn vào đây -->
-                                </span>
-                            </div>
+
+                    @* Hiển thị thông báo lỗi nếu có *@
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Error: </strong>@ViewBag.ErrorMessage
                         </div>
-                    </div>
-                    <form id="registerForm" data-action-url="@Url.Action("Register", "Account")">
+                    }
+
+                    <form action="@Url.Action("Register", "Account")" method="post">
                         <!-- Tên đệm và Tên -->
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Tên đệm">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Tên đệm" required />
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Tên">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Tên" required />
                                 </div>
                             </div>
                         </div>
@@ -42,17 +36,17 @@
                             <label for="dateOfBirth" class="form-label">Ngày Sinh</label>
                             <div class="row">
                                 <div class="col-4">
-                                    <select class="form-control rounded-lg" id="day" name="day">
+                                    <select class="form-control rounded-lg" id="day" name="day" required>
                                         <option value="" disabled selected>Ngày</option>
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <select class="form-control rounded-lg" id="month" name="month">
+                                    <select class="form-control rounded-lg" id="month" name="month" required>
                                         <option value="" disabled selected>Tháng</option>
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <select class="form-control rounded-lg" id="year" name="year">
+                                    <select class="form-control rounded-lg" id="year" name="year" required>
                                         <option value="" disabled selected>Năm</option>
                                     </select>
                                 </div>
@@ -65,19 +59,19 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderMale" name="gender" value="Nam">
+                                        <input class="form-check-input" type="radio" id="genderMale" name="gender" value="Nam" required />
                                         <label class="form-check-label" for="genderMale">Nam</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderFemale" name="gender" value="Nữ">
+                                        <input class="form-check-input" type="radio" id="genderFemale" name="gender" value="Nữ" required />
                                         <label class="form-check-label" for="genderFemale">Nữ</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderOther" name="gender" value="Khác">
+                                        <input class="form-check-input" type="radio" id="genderOther" name="gender" value="Khác" required />
                                         <label class="form-check-label" for="genderOther">Khác</label>
                                     </div>
                                 </div>
@@ -86,22 +80,22 @@
 
                         <!-- Tên đăng nhập -->
                         <div class="mb-3">
-                            <input type="text" class="form-control rounded-lg" id="username" name="username" placeholder="Tên đăng nhập">
+                            <input type="text" class="form-control rounded-lg" id="username" name="username" placeholder="Tên đăng nhập" required />
                         </div>
 
                         <!-- Mật khẩu -->
                         <div class="mb-3">
-                            <input type="password" class="form-control rounded-lg" id="password" name="password" placeholder="Mật Khẩu">
+                            <input type="password" class="form-control rounded-lg" id="password" name="password" placeholder="Mật Khẩu" required />
                         </div>
 
                         <!-- Nhập lại mật khẩu -->
                         <div class="mb-3">
-                            <input type="password" class="form-control rounded-lg" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu">
+                            <input type="password" class="form-control rounded-lg" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required />
                         </div>
 
                         <!-- Nút đăng ký -->
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary w-100" id="btnRegister" data-redirect-url="@Url.Action("Login", "Account")">Đăng Ký</button>
+                            <button type="submit" class="btn btn-primary w-100">Đăng Ký</button>
                         </div>
                     </form>
                 </div>

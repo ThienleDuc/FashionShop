@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using FashionShop.Models.LeDucThien.Entity;
 
 namespace FashionShop.Models.LeDucThien.ProcessData
 {
-    public class pd_AccountUser
+    public class pd_KhachHang
     {
         private ConnectionDatabase con = new ConnectionDatabase(); // Khởi tạo đối tượng ConnectionDatabase
 
         // Phương thức lấy danh sách người dùng từ cơ sở dữ liệu
-        public List<ent_AccountUser> GetAccountUsers()
+        public List<ent_KhachHang> GetAccountUsers()
         {
             string query = "SELECT * FROM KhachHang"; // Câu truy vấn SQL để lấy tất cả người dùng
-            List<ent_AccountUser> list = new List<ent_AccountUser>();
+            List<ent_KhachHang> list = new List<ent_KhachHang>();
 
             // Tạo kết nối đến cơ sở dữ liệu
             using (SqlConnection connection = con.GetConnection())
@@ -26,20 +27,21 @@ namespace FashionShop.Models.LeDucThien.ProcessData
                     SqlCommand cmd = new SqlCommand(query, connection);
                     SqlDataReader reader = cmd.ExecuteReader(); // Đọc kết quả trả về
 
-                    // Lặp qua các bản ghi trả về và chuyển đổi thành đối tượng ent_AccountUser
+                    // Lặp qua các bản ghi trả về và chuyển đổi thành đối tượng ent_KhachHang
                     while (reader.Read())
                     {
-                        // Tạo đối tượng ent_AccountUser từ dữ liệu trong mỗi bản ghi
-                        ent_AccountUser user = new ent_AccountUser
+                        // Tạo đối tượng ent_KhachHang từ dữ liệu trong mỗi bản ghi
+                        ent_KhachHang user = new ent_KhachHang
                         {
-                            Username = reader["Username"].ToString(),
-                            FirstName = reader["FirstName"].ToString(),
-                            LastName = reader["LastName"].ToString(),
-                            Day = Convert.ToInt32(reader["Day"]),
-                            Month = Convert.ToInt32(reader["Month"]),
-                            Year = Convert.ToInt32(reader["Year"]),
-                            Gender = reader["Gender"].ToString(),
-                            Password = reader["Password"].ToString()
+                            Username = reader["username"].ToString(),
+                            MatKhau = reader["matKhau"].ToString(),
+                            FirstName = reader["firstName"].ToString(),
+                            LastName = reader["lastName"].ToString(),
+                            Day = Convert.ToInt32(reader["day"]),
+                            Moth = Convert.ToInt32(reader["moth"]),  // Sửa lại tên cột "moth" nếu cần
+                            Year = Convert.ToInt32(reader["year"]),
+                            Gender = reader["gender"].ToString(),
+                            Anh = reader["anh"].ToString() // Đường dẫn ảnh
                         };
 
                         // Thêm đối tượng vào danh sách

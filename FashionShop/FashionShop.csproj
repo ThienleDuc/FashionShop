@@ -155,8 +155,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConnectionDatabase.cs" />
-    <Compile Include="Models\LeDucThien\Entity\ent_AccountUser.cs" />
-    <Compile Include="Models\LeDucThien\ProcessData\pd_AccountUser.cs" />
+    <Compile Include="Models\LeDucThien\Entity\ent_KhachHang.cs" />
+    <Compile Include="Models\LeDucThien\ProcessData\pd_KhachHang.cs" />
     <Compile Include="Models\OtherMethods\CookieHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

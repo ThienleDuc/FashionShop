@@ -11,34 +11,40 @@ namespace FashionShop.Controllers
 {
     public class AccountController : Controller
     {
-        private pd_AccountUser accountUserProcess = new pd_AccountUser();
-
-        // Phương thức đăng nhập
-        [HttpPost]
-        public JsonResult Login(string username, string password)
-        {
-            // Kiểm tra thông tin đăng nhập
-            var accountUsers = accountUserProcess.GetAccountUsers();
-            var user = accountUsers.FirstOrDefault(u => u.Username == username && u.Password == password);
-
-            if (user != null) // Đăng nhập thành công
-            {
-                // Lưu trạng thái đăng nhập và tên người dùng vào cookie
-                CookieHelper.SetLoginCookies(username);
-
-                return Json(new { success = true });
-            }
-            else
-            {
-                // Nếu thông tin đăng nhập không hợp lệ
-                return Json(new { success = false });
-            }
-        }
+        private pd_KhachHang accountUserProcess = new pd_KhachHang();
 
         // Trang đăng nhập
         public ActionResult Login()
         {
             return View();
+        }
+
+        // Phương thức POST để xử lý đăng nhập
+        [HttpPost]
+        public ActionResult Login(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                ViewBag.ErrorMessage = "Tên người dùng và mật khẩu không được để trống.";
+                return View();
+            }
+
+            // Kiểm tra thông tin đăng nhập với cơ sở dữ liệu
+            var user = accountUserProcess.GetAccountUsers().FirstOrDefault(u => u.Username == username && u.MatKhau == password);
+
+            if (user != null) // Nếu tìm thấy người dùng hợp lệ
+            {
+                // Lưu trạng thái đăng nhập vào cookie (nếu cần)
+                CookieHelper.SetLoginCookies(username);
+
+                return RedirectToAction("Index", "Home"); // Chuyển hướng đến trang chủ
+            }
+            else
+            {
+                // Nếu không tìm thấy người dùng hoặc mật khẩu sai
+                ViewBag.ErrorMessage = "Tên đăng nhập hoặc mật khẩu không chính xác.";
+                return View(); // Trả về lại trang đăng nhập với thông báo lỗi
+            }
         }
 
         // Phương thức đăng xuất
@@ -48,23 +54,6 @@ namespace FashionShop.Controllers
             CookieHelper.ClearLoginCookies();
 
             return RedirectToAction("Index", "Home");
-        }
-
-        // Phương thức đăng ký
-        [HttpPost]
-        public JsonResult Register(string username, string password)
-        {
-            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password)) // Đảm bảo thông tin không rỗng
-            {
-                // Lưu thông tin đăng ký vào cookie thông qua CookieHelper
-                CookieHelper.SetRegisterCookies(username, password);
-
-                return Json(new { success = true });
-            }
-            else
-            {
-                return Json(new { success = false });
-            }
         }
 
         // Trang đăng ký
