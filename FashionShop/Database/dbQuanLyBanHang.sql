@@ -77,15 +77,32 @@ CREATE TABLE DanhGia (
     reviewer NVARCHAR(255)
 );
 
--- 7: NganHang
-CREATE TABLE NganHang (
-    MaNganHang INT PRIMARY KEY IDENTITY(1,1),
-    maAccount VARCHAR(255),
-	anhnganhang VARCHAR(MAX),
+CREATE TABLE NganHangDuocLienKet (
+	MaNganHangLienKet INT PRIMARY KEY IDENTITY(1,1),
     TenNganHang NVARCHAR(255),
-    TenChuSoHuu NVARCHAR(50),
-    SoTaiKhoan VARCHAR(255),
-    ChiNhanh NVARCHAR(50)
+	anhnganhang VARCHAR(MAX),
+);
+
+CREATE TABLE ChiNhanhNganHang (
+    maChiNhanh INT PRIMARY KEY IDENTITY(1,1),   
+    maNganHangLienKet INT,    -- làm khóa phụ    
+    TenChiNhanh NVARCHAR(255)        
+);
+
+CREATE TABLE TaiKhoanNganHangDuocLienKet (
+	SoTaiKhoan VARCHAR(14) PRIMARY KEY,
+	MaNganHangLienKet INT, -- làm khóa phụ
+	TenChuSoHuu NVARCHAR(50)
+);
+
+-- 7: NganHang
+CREATE TABLE TaiKhoanNganHangCuaToi (
+    MaTaiKhoan INT PRIMARY KEY IDENTITY(1,1),
+    maAccount VARCHAR(255), -- làm khóa phụ
+    maNganHangLienKet INT,
+	SoTaiKhoan VARCHAR(14),
+	TenChuSoHuu NVARCHAR(50),
+    TenChiNhanh NVARCHAR(255)        
 );
 
 -- 8: TinhThanhPho
@@ -235,10 +252,6 @@ ALTER TABLE DanhGia
 ADD CONSTRAINT FK_DanhGia_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id),
     CONSTRAINT FK_DanhGia_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username);
 
--- Bảng 7: NganHang
-ALTER TABLE NganHang
-ADD CONSTRAINT FK_NganHang_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username);
-
 -- Bảng 11: DiaChiGiaoHang
 ALTER TABLE DiaChiGiaoHang
 ADD CONSTRAINT FK_DiaChi_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username),
@@ -276,3 +289,19 @@ ALTER TABLE Voucher
 ADD CONSTRAINT FK_Voucher_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username),
     CONSTRAINT FK_Voucher_DieuKien FOREIGN KEY (MaDieuKien) REFERENCES DieuKienGiam(maDieuKien),
     CONSTRAINT FK_Voucher_TrangThaiGiam FOREIGN KEY (maTrangThaiGiam) REFERENCES TrangThaiGiam(maTrangThaiGiam);
+
+ALTER TABLE ChiNhanhNganHang
+ADD CONSTRAINT FK_ChiNhanhNganHang_NganHangDuocLienKet FOREIGN KEY (maNganHangLienKet)
+REFERENCES NganHangDuocLienKet(MaNganHangLienKet);
+
+ALTER TABLE TaiKhoanNganHangDuocLienKet
+ADD CONSTRAINT FK_TaiKhoanNganHangDuocLienKet_NganHangDuocLienKet FOREIGN KEY (MaNganHangLienKet)
+REFERENCES NganHangDuocLienKet(MaNganHangLienKet);
+
+ALTER TABLE TaiKhoanNganHangCuaToi
+ADD CONSTRAINT FK_TaiKhoanNganHangCuaToi_KhachHang FOREIGN KEY (maAccount)
+REFERENCES KhachHang(username);
+
+ALTER TABLE TaiKhoanNganHangCuaToi
+ADD CONSTRAINT FK_TaiKhoanNganHangCuaToi_NganHangDuocLienKet FOREIGN KEY (maNganHangLienKet)
+REFERENCES NganHangDuocLienKet(MaNganHangLienKet);

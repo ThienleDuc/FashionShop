@@ -51,6 +51,8 @@ D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\roslyn\vbc.rsp
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\roslyn\VBCSCompiler.exe
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\roslyn\VBCSCompiler.exe.config
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\Antlr3.Runtime.dll
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.dll
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.SqlServer.dll
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\Microsoft.Web.Infrastructure.dll
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\Newtonsoft.Json.dll
@@ -65,6 +67,8 @@ D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.WebPages.Deploym
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.WebPages.dll
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.WebPages.Razor.dll
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\WebGrease.dll
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.xml
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.SqlServer.xml
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.Helpers.xml
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.Mvc.xml
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.Optimization.xml
@@ -78,12 +82,8 @@ D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Net.Http.Formatting.
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.Http.xml
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\System.Web.Http.WebHost.xml
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Debug\FashionShop.csproj.AssemblyReference.cache
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Debug\FashionShop.csproj.CoreCompileInputs.cache
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Debug\FashionShop.csproj.CopyComplete
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Debug\FashionShop.dll
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Debug\FashionShop.pdb
-D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.dll
-D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.SqlServer.dll
-D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.xml
-D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.SqlServer.xml
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Debug\FashionShop.csproj.AssemblyReference.cache

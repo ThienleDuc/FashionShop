@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card p-4">
-                <h3 class="text-center mb-4">Cập nhật Hồ Sơ</h3>
+                <h3 class="text-center mb-4">Hồ Sơ</h3>
 
                 <!-- Tên đăng nhập -->
                 <div class="mb-3">
@@ -31,20 +31,48 @@
                     <div class="row">
                         <div class="col-4">
                             <select class="form-control" id="day" name="day">
-                                <option value="@ViewBag.Day" disabled selected>Ngày</option>
-                                <!-- Option ngày sinh có thể được điền vào đây -->
+                                @for (int i = 1; i <= 31; i++)
+                                {
+                                    if (i == @ViewBag.Day)
+                                    {
+                                        <option value="@i" selected>@i</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
                             </select>
                         </div>
                         <div class="col-4">
                             <select class="form-control" id="month" name="month">
-                                <option value="@ViewBag.Month" disabled selected>Tháng</option>
-                                <!-- Option tháng có thể được điền vào đây -->
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    if (i == @ViewBag.Month)
+                                    {
+                                        <option value="@i" selected>@i</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
+                                
                             </select>
                         </div>
                         <div class="col-4">
                             <select class="form-control" id="year" name="year">
-                                <option value="@ViewBag.Year" disabled selected>Năm</option>
-                                <!-- Option năm sinh có thể được điền vào đây -->
+                                @for (int i = DateTime.Now.Year - 100; i <= DateTime.Now.Year; i++)
+                                {
+                                    if (i == @ViewBag.Year)
+                                    {
+                                        <option value="@i" selected>@i</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
                             </select>
                         </div>
                     </div>
@@ -87,7 +115,7 @@
             <div class="profile-container text-center d-flex flex-column align-items-center">
                 <!-- Ảnh người dùng -->
                 <div class="mb-3">
-                    <img src="@ViewBag.Avatar" alt="User Avatar" class="rounded rounded-circle border-dark" style="width: 150px; height: 150px; object-fit: cover;">
+                    <img src="@Url.Content("~/img/" + ViewBag.Avatar)" alt="User Avatar" class="rounded rounded-circle border-dark" style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
                 <!-- Nút cập nhật ảnh -->
                 <button type="button" class="btn btn-primary">Thay đổi</button>

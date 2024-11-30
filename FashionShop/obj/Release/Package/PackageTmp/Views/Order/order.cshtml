@@ -75,9 +75,19 @@
 
                             <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
                             <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                                <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                    <i class="fas fa-eye text-primary"></i> View
-                                </a>
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
                                 @if (@ViewBag.TrangThai == "Hoàn thành")
                                 {
                                     <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
@@ -132,9 +142,19 @@
 
                             <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
                             <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                                <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                    <i class="fas fa-eye text-primary"></i> View
-                                </a>
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
                                 @if (@ViewBag.TrangThai == "Hoàn thành")
                                 {
                                     <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
@@ -212,9 +232,19 @@
 
                             <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
                             <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                                <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                    <i class="fas fa-eye text-primary"></i> View
-                                </a>
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
                                 @if (@ViewBag.TrangThai == "Hoàn thành")
                                 {
                                     <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
@@ -292,9 +322,19 @@
 
                             <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
                             <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                                <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                    <i class="fas fa-eye text-primary"></i> View
-                                </a>
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
                                 @if (@ViewBag.TrangThai == "Hoàn thành")
                                 {
                                     <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>
@@ -372,9 +412,19 @@
 
                             <!-- Hàng 2: View Detail và Mua lại (căn phải) -->
                             <div class="d-flex justify-content-end w-100 align-items-center" style="gap: 1.875rem;">
-                                <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
-                                    <i class="fas fa-eye text-primary"></i> View
-                                </a>
+                                @if (ViewBag.trangthai == "Đã hủy")
+                                {
+                                    <a href="@Url.Action("ChiTietHuyDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ChiTietDonHang", "Order")" class="btn btn-sm text-dark">
+                                        <i class="fas fa-eye text-primary"></i> View
+                                    </a>
+                                }
+
                                 @if (@ViewBag.TrangThai == "Hoàn thành")
                                 {
                                     <button class="btn btn-info" data-toggle="modal" data-target="#reorderModal">Mua Lại</button>

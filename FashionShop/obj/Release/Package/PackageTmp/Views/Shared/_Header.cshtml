@@ -116,7 +116,7 @@
                         <a href="@Url.Action("contact", "Contact")" class="nav-item nav-link @Html.Raw(@ViewBag.Title.Equals("Contact") ? "active" : "")">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        <div class="nav-item dropdown notification" @Html.Raw(isLoggedIn ? "" : "hidden")>
+                        <div class="nav-item dropdown notification" @Html.Raw(isLoggedIn == true ? "show" : "hidden")>
                             <a href="@Url.Action("CapNhatDonHang", "Notification")" class="nav-link">
                                 <i class="fa-solid fa-bell"></i> Thông báo
                             </a>
@@ -173,9 +173,9 @@
                                 <a href="@Url.Action("CapNhatDonHang", "Notification")" class="dropdown-item w-100 text-center p-3">Xem tát cả</a>
                             </div>
                         </div>
-                        <a href="@Url.Action("Login", "Account")" class="nav-item nav-link" @Html.Raw(isLoggedIn ? "hidden" : "")>Login</a>
-                        <a href="@Url.Action("Register", "Account")" class="nav-item nav-link" @Html.Raw(isLoggedIn ? "hidden" : "")>Register</a>
-                        <div class="nav-item dropdown myAccount" @Html.Raw(isLoggedIn ? "" : "hidden")>
+                        <a href="@Url.Action("Login", "Account")" class="nav-item nav-link" @Html.Raw(isLoggedIn == true ? "hidden" : "show")>Login</a>
+                        <a href="@Url.Action("Register", "Account")" class="nav-item nav-link" @Html.Raw(isLoggedIn == true? "hidden" : "show")>Register</a>
+                        <div class="nav-item dropdown myAccount" @Html.Raw(isLoggedIn == true ? "show" : "hidden")>
                             <a href="@Url.Action("HoSo", "MyAccount")" class="nav-link">
                                 <i class="fa-solid fa-circle-user"></i> @username
                             </a>

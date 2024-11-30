@@ -37,17 +37,47 @@
                             <div class="row">
                                 <div class="col-4">
                                     <select class="form-control rounded-lg" id="day" name="day" required>
-                                        <option value="" disabled selected>Ngày</option>
+                                        @for (int i = 1; i <= 31; i++)
+                                        {
+                                            if (i == DateTime.Now.Day)
+                                            {
+                                                <option value="@i" selected>@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-4">
                                     <select class="form-control rounded-lg" id="month" name="month" required>
-                                        <option value="" disabled selected>Tháng</option>
+                                        @for (int i = 1; i <= 12; i++)
+                                        {
+                                            if (i == DateTime.Now.Month)
+                                            {
+                                                <option value="@i" selected>@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-4">
                                     <select class="form-control rounded-lg" id="year" name="year" required>
-                                        <option value="" disabled selected>Năm</option>
+                                        @for (int i = DateTime.Now.Year - 100; i <= DateTime.Now.Year; i++)
+                                        {
+                                            if (i == DateTime.Now.Year)
+                                            {
+                                                <option value="@i" selected>@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        }
                                     </select>
                                 </div>
                             </div>

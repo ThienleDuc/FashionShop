@@ -155,8 +155,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConnectionDatabase.cs" />
+    <Compile Include="Models\LeDucThien\Entity\ent_ChiNhanhNganHang.cs" />
     <Compile Include="Models\LeDucThien\Entity\ent_KhachHang.cs" />
+    <Compile Include="Models\LeDucThien\Entity\ent_NganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\Entity\ent_TaiKhoanNganHangCuaToi.cs" />
+    <Compile Include="Models\LeDucThien\Entity\ent_TaiKhoanNganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ProcessData\pd_ChiNhanhNganHang.cs" />
     <Compile Include="Models\LeDucThien\ProcessData\pd_KhachHang.cs" />
+    <Compile Include="Models\LeDucThien\ProcessData\pd_NganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ProcessData\pd_TaiKhoanNganHangCuaToi.cs" />
+    <Compile Include="Models\LeDucThien\ProcessData\pd_TaiKhoanNganHangDuocLienKet.cs" />
     <Compile Include="Models\OtherMethods\CookieHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,6 +178,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\avatar-anime-1.jpg" />
     <Content Include="img\carousel-1.jpg" />
     <Content Include="img\carousel-2.jpg" />
     <Content Include="img\cat-1.jpg" />
@@ -178,6 +187,7 @@
     <Content Include="img\cat-4.jpg" />
     <Content Include="img\cat-5.jpg" />
     <Content Include="img\cat-6.jpg" />
+    <Content Include="img\logo-VietinBank.png" />
     <Content Include="img\offer-1.png" />
     <Content Include="img\offer-2.png" />
     <Content Include="img\payments.png" />
@@ -219,6 +229,8 @@
     <Content Include="lib\owlcarousel\LICENSE" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile3.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

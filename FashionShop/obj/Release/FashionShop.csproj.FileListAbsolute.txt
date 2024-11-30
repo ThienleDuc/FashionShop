@@ -83,3 +83,7 @@ D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Release\FashionShop.csproj.
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Release\FashionShop.csproj.CopyComplete
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Release\FashionShop.dll
 D:\WORKSPACE\project_wnc\FashionShop\FashionShop\obj\Release\FashionShop.pdb
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.dll
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.SqlServer.dll
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.xml
+D:\WORKSPACE\project_wnc\FashionShop\FashionShop\bin\EntityFramework.SqlServer.xml
