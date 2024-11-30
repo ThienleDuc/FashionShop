@@ -5,23 +5,24 @@ go
 -- 1: KhachHang
 CREATE TABLE KhachHang (
     username VARCHAR(255) PRIMARY KEY,
-    password VARCHAR(255),
+    matKhau VARCHAR(255),
     firstName NVARCHAR(255),
     lastName NVARCHAR(255),
     day INT,
     moth INT,
     year INT,
-    gender NVARCHAR(50)
+    gender NVARCHAR(50),
+	anh VARCHAR(MAX),
 );
 
 -- 2: SanPham
 CREATE TABLE SanPham (
     id VARCHAR(20) PRIMARY KEY,
     maphanLoai INT,
-    anh VARCHAR(MAX),
-    name NVARCHAR(255),
+	anh VARCHAR(MAX),
+    tenSanPham NVARCHAR(255),
     price DECIMAL(10, 2),
-    description NVARCHAR(MAX),
+    moTa NVARCHAR(MAX),
     SoLuongHienCo INT,
     soLuongBanRa INT DEFAULT 0
 );
@@ -38,6 +39,13 @@ CREATE TABLE MauSac (
     maMauSac INT PRIMARY KEY IDENTITY(1,1),
     maSanPham VARCHAR(20),
     mauSac NVARCHAR(255)
+);
+
+-- 2.3: AnhSanPham
+CREATE TABLE AnhSanPham (
+    maAnhSanPham INT PRIMARY KEY,
+    maSanPham VARCHAR(20),
+    anh VARCHAR(MAX)
 );
 
 -- 3: ChiTietSanPham
@@ -209,6 +217,10 @@ ADD CONSTRAINT FK_KichThuoc_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(i
 -- Bảng 2.2: MauSac
 ALTER TABLE MauSac
 ADD CONSTRAINT FK_MauSac_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id);
+
+-- Bảng 2.3: AnhSanPham
+ALTER TABLE AnhSanPham
+ADD CONSTRAINT FK_AnhSanPham_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id);
 
 -- Bảng 5: PhanLoaiCon
 ALTER TABLE PhanLoaiCon
