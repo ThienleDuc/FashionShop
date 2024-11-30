@@ -73,6 +73,7 @@ CREATE TABLE DanhGia (
 CREATE TABLE NganHang (
     MaNganHang INT PRIMARY KEY IDENTITY(1,1),
     maAccount VARCHAR(255),
+	anhnganhang VARCHAR(MAX),
     TenNganHang NVARCHAR(255),
     TenChuSoHuu NVARCHAR(50),
     SoTaiKhoan VARCHAR(255),
