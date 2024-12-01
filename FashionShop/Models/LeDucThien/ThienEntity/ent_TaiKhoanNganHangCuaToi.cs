@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FashionShop.Models.LeDucThien.Entity
+namespace FashionShop.Models.LeDucThien.ThienEntity
 {
     public class ent_TaiKhoanNganHangCuaToi
     {

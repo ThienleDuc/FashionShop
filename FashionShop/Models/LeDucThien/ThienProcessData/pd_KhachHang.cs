@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using FashionShop.Models.LeDucThien.Entity;
+using FashionShop.Models.LeDucThien.ThienEntity;
 
-namespace FashionShop.Models.LeDucThien.ProcessData
+namespace FashionShop.Models.LeDucThien.ThienProcessData
 {
     public class pd_KhachHang
     {

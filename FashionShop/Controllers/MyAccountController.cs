@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FashionShop.Models.LeDucThien.ProcessData;
+using FashionShop.Models.LeDucThien.ThienProcessData;
 
 namespace FashionShop.Controllers
 {
@@ -60,14 +60,30 @@ namespace FashionShop.Controllers
 
         public ActionResult DiaChi()
         {
-            ViewBag.Name = "Lê Đức Thiện";
-            ViewBag.PhoneNumber = "0862972248";
-            ViewBag.Location = "KTX trướng Sư Phạm Kỹ Thuật - Đai Học Đà Nẵng";
+            // Giả sử bạn lấy thông tin từ Cookie hoặc Database
+            HttpCookie usernameCookie = Request.Cookies["Username"];
+            var username = usernameCookie != null ? usernameCookie.Value : string.Empty;
 
-            // Dữ liệu cho Tỉnh, Quận, Xã
-            ViewBag.Province = "Đà Nẵng";   
-            ViewBag.District = "Hải Châu";  
-            ViewBag.Ward = "Thanh Bình";
+            pd_DiaChiGiaoHang diaChiGiaoHangProcess = new pd_DiaChiGiaoHang();
+            pd_TinhThanh tinhThanhProcess = new pd_TinhThanh();
+            pd_XaPhuong xaPhuongProcess = new pd_XaPhuong();
+            pd_QuanHuyen quanHuyenProcess = new pd_QuanHuyen();
+            
+
+            var diaChiGiaoHang = diaChiGiaoHangProcess.GetDiaChiGiaoHangWhere(username).FirstOrDefault();
+
+            int maTinhThanh = diaChiGiaoHang.MaTinhThanh;
+            int maQuanHuyen = diaChiGiaoHang.MaQuanHuyen;
+            int maXaPhuong = diaChiGiaoHang.MaXaPhuong;
+
+            ViewBag.TenTinhThanh = tinhThanhProcess.GetTenTinhThanh(maTinhThanh);
+            ViewBag.TenQuanHuyen = quanHuyenProcess.GetTenQuanHuyen(maQuanHuyen);
+            ViewBag.TenXaPhuong = xaPhuongProcess.GetTenXaPhuong(maXaPhuong);
+
+            ViewBag.TenKhachHang = diaChiGiaoHang.TenKhachHang;
+            ViewBag.SDT = diaChiGiaoHang.SDT;
+            ViewBag.DiaChi = diaChiGiaoHang.DiaChiGiaoHang;
+
             return View();
         }
 

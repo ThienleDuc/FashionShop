@@ -155,16 +155,32 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConnectionDatabase.cs" />
-    <Compile Include="Models\LeDucThien\Entity\ent_ChiNhanhNganHang.cs" />
-    <Compile Include="Models\LeDucThien\Entity\ent_KhachHang.cs" />
-    <Compile Include="Models\LeDucThien\Entity\ent_NganHangDuocLienKet.cs" />
-    <Compile Include="Models\LeDucThien\Entity\ent_TaiKhoanNganHangCuaToi.cs" />
-    <Compile Include="Models\LeDucThien\Entity\ent_TaiKhoanNganHangDuocLienKet.cs" />
-    <Compile Include="Models\LeDucThien\ProcessData\pd_ChiNhanhNganHang.cs" />
-    <Compile Include="Models\LeDucThien\ProcessData\pd_KhachHang.cs" />
-    <Compile Include="Models\LeDucThien\ProcessData\pd_NganHangDuocLienKet.cs" />
-    <Compile Include="Models\LeDucThien\ProcessData\pd_TaiKhoanNganHangCuaToi.cs" />
-    <Compile Include="Models\LeDucThien\ProcessData\pd_TaiKhoanNganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_ChiNhanhNganHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_DiaChiGiaoHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_DieuKienGiam.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_KhachHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_NganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_QuanHuyen.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_TaiKhoanNganHangCuaToi.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_TaiKhoanNganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_TinhThanhPho.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_TrangThaiGiam.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_Voucher.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_VoucherCuaToi.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_XaPhuong.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_ChiNhanhNganHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_DiaChiGiaoHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_DieuKienGiam.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_KhachHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_NganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_QuanHuyen.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_TaiKhoanNganHangCuaToi.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_TaiKhoanNganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_TinhThanh.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_TrangThaiGiam.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_Voucher.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_VoucherCuaToi.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_XaPhuong.cs" />
     <Compile Include="Models\OtherMethods\CookieHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

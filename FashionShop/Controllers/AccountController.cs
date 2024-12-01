@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using FashionShop.Models.LeDucThien.Entity;
-using FashionShop.Models.LeDucThien.ProcessData;
+using FashionShop.Models.LeDucThien.ThienProcessData;
 using FashionShop.Models.OtherMethods;
 
 namespace FashionShop.Controllers

@@ -132,6 +132,7 @@ CREATE TABLE DiaChiGiaoHang (
     MaTinhThanh INT,
     MaQuanHuyen INT,
     MaXaPhuong INT,
+	TenKhachHang NVARCHAR(255),
     SDT VARCHAR(20),
     DiaChiGiaoHang NVARCHAR(255)
 );
@@ -180,11 +181,12 @@ CREATE TABLE ThongBao (
 
 -- 18: Voucher
 CREATE TABLE Voucher (
-    maVoucher VARCHAR(10) PRIMARY KEY,
-    maAccount VARCHAR(255),
-    hanSuDung DATE,
+	maVoucher VARCHAR(10) PRIMARY KEY,
+	tenVoucher VARCHAR(50),
+	hanSuDung DATE,
+	mucGiam INT,
     MaDieuKien INT,
-    maTrangThaiGiam INT
+    maTrangThaiGiam INT,
 );
 
 -- 19: DieuKienGiam
@@ -196,8 +198,15 @@ CREATE TABLE DieuKienGiam (
 -- 20: TrangThaiGiam
 CREATE TABLE TrangThaiGiam (
     maTrangThaiGiam INT PRIMARY KEY IDENTITY(1,1),
-    trangThaiGiam NVARCHAR(255),
-    mucGiam INT
+    trangThaiGiam NVARCHAR(255)
+);
+
+CREATE TABLE VoucherCuaToi (
+    maVoucherCuaToi VARCHAR(10) PRIMARY KEY,
+	maVoucher VARCHAR(10), -- làm khóa ngoại
+    maAccount VARCHAR(255), -- làm khóa ngoại
+	trangThaiSuDung NVARCHAR(255)
+
 );
 
 -- Bảng 1: KhachHang
@@ -286,10 +295,23 @@ ADD CONSTRAINT FK_ThongBao_DonHang FOREIGN KEY (maDonHang) REFERENCES DonHang(ma
 
 -- Bảng 18: Voucher
 ALTER TABLE Voucher
-ADD CONSTRAINT FK_Voucher_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username),
-    CONSTRAINT FK_Voucher_DieuKien FOREIGN KEY (MaDieuKien) REFERENCES DieuKienGiam(maDieuKien),
-    CONSTRAINT FK_Voucher_TrangThaiGiam FOREIGN KEY (maTrangThaiGiam) REFERENCES TrangThaiGiam(maTrangThaiGiam);
+ADD CONSTRAINT FK_Voucher_DieuKienGiam
+FOREIGN KEY (MaDieuKien) REFERENCES DieuKienGiam(maDieuKien);
 
+ALTER TABLE Voucher
+ADD CONSTRAINT FK_Voucher_TrangThaiGiam
+FOREIGN KEY (maTrangThaiGiam) REFERENCES TrangThaiGiam(maTrangThaiGiam);
+
+ALTER TABLE VoucherCuaToi
+ADD CONSTRAINT FK_VoucherCuaToi_Voucher
+FOREIGN KEY (maVoucher) REFERENCES Voucher(maVoucher);
+
+ALTER TABLE VoucherCuaToi
+ADD CONSTRAINT FK_VoucherCuaToi_KhachHang
+FOREIGN KEY (maAccount) REFERENCES KhachHang(username);
+
+
+-- Ngân hàng --
 ALTER TABLE ChiNhanhNganHang
 ADD CONSTRAINT FK_ChiNhanhNganHang_NganHangDuocLienKet FOREIGN KEY (maNganHangLienKet)
 REFERENCES NganHangDuocLienKet(MaNganHangLienKet);
