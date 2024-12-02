@@ -156,7 +156,8 @@ CREATE TABLE ThanhToan (
     maThanhToan INT PRIMARY KEY IDENTITY(1,1),
     maGioHang INT,
     phuongThucThanhToan NVARCHAR(255),
-    luuYKhiNhanHang NVARCHAR(255)
+    luuYKhiNhanHang NVARCHAR(255),
+	TongTien DECIMAL(10, 2)
 );
 
 -- 15: DonHang
