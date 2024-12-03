@@ -1,4 +1,6 @@
-﻿@{
+﻿@model FashionShop.Models.LeDucThien.Entity.ent_KhachHang
+
+@{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_layout2.cshtml";
 }
@@ -23,10 +25,10 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Tên đệm" required />
+                                    <input type="text" class="form-control" id="firstName" name="FirstName" placeholder="Tên đệm" required />
                                 </div>
                                 <div class="col-6">
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Tên" required />
+                                    <input type="text" class="form-control" id="lastName" name="LastName" placeholder="Tên" required />
                                 </div>
                             </div>
                         </div>
@@ -36,18 +38,27 @@
                             <label for="dateOfBirth" class="form-label">Ngày Sinh</label>
                             <div class="row">
                                 <div class="col-4">
-                                    <select class="form-control rounded-lg" id="day" name="day" required>
-                                        <option value="" disabled selected>Ngày</option>
+                                    <select class="form-control rounded-lg" id="day" name="Day" required>
+                                        @for (int i = 1; i <= 31; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <select class="form-control rounded-lg" id="month" name="month" required>
-                                        <option value="" disabled selected>Tháng</option>
+                                    <select class="form-control rounded-lg" id="month" name="Moth" required>
+                                        @for (int i = 1; i <= 12; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <select class="form-control rounded-lg" id="year" name="year" required>
-                                        <option value="" disabled selected>Năm</option>
+                                    <select class="form-control rounded-lg" id="year" name="Year" required>
+                                        @for (int i = DateTime.Now.Year - 100; i <= DateTime.Now.Year; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -59,19 +70,19 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderMale" name="gender" value="Nam" required />
+                                        <input class="form-check-input" type="radio" id="genderMale" name="Gender" value="Nam" required />
                                         <label class="form-check-label" for="genderMale">Nam</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderFemale" name="gender" value="Nữ" required />
+                                        <input class="form-check-input" type="radio" id="genderFemale" name="Gender" value="Nữ" required />
                                         <label class="form-check-label" for="genderFemale">Nữ</label>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderOther" name="gender" value="Khác" required />
+                                        <input class="form-check-input" type="radio" id="genderOther" name="Gender" value="Khác" required />
                                         <label class="form-check-label" for="genderOther">Khác</label>
                                     </div>
                                 </div>
@@ -80,17 +91,17 @@
 
                         <!-- Tên đăng nhập -->
                         <div class="mb-3">
-                            <input type="text" class="form-control rounded-lg" id="username" name="username" placeholder="Tên đăng nhập" required />
+                            <input type="text" class="form-control rounded-lg" id="username" name="Username" placeholder="Tên đăng nhập" required />
                         </div>
 
                         <!-- Mật khẩu -->
                         <div class="mb-3">
-                            <input type="password" class="form-control rounded-lg" id="password" name="password" placeholder="Mật Khẩu" required />
+                            <input type="password" class="form-control rounded-lg" id="password" name="MatKhau" placeholder="Mật Khẩu" required />
                         </div>
 
                         <!-- Nhập lại mật khẩu -->
                         <div class="mb-3">
-                            <input type="password" class="form-control rounded-lg" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required />
+                            <input type="password" class="form-control rounded-lg" id="confirmPassword" name="ConfirmPassword" placeholder="Nhập lại mật khẩu" required />
                         </div>
 
                         <!-- Nút đăng ký -->

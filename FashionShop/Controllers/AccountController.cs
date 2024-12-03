@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FashionShop.Models.LeDucThien.Entity;
+using FashionShop.Models.LeMinhToan.ProcessData;
 using FashionShop.Models.LeDucThien.ProcessData;
 using FashionShop.Models.OtherMethods;
 
@@ -11,7 +12,8 @@ namespace FashionShop.Controllers
 {
     public class AccountController : Controller
     {
-        private pd_KhachHang accountUserProcess = new pd_KhachHang();
+        private Models.LeDucThien.ProcessData.pd_KhachHang accountUserProcess = new Models.LeDucThien.ProcessData.pd_KhachHang();
+        private Models.LeMinhToan.ProcessData.dk_KhachHang registerProcess = new Models.LeMinhToan.ProcessData.dk_KhachHang();
 
         // Trang đăng nhập
         public ActionResult Login()
@@ -62,5 +64,29 @@ namespace FashionShop.Controllers
             return View();
         }
 
+        // Phương thức POST để xử lý đăng ký
+        [HttpPost]
+        public ActionResult Register(ent_KhachHang model)
+        {
+         
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Gọi phương thức để thêm khách hàng vào cơ sở dữ liệu
+                    registerProcess.RegisterCustomer(model);
+
+                    // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
+                    return RedirectToAction("Login");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Đã xảy ra lỗi khi đăng ký: " + ex.Message;
+                }
+            }
+
+            // Nếu có lỗi, trả về lại trang đăng ký với thông báo lỗi
+            return View(model);
+        }
     }
 }

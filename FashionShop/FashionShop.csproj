@@ -157,6 +157,9 @@
     <Compile Include="Models\ConnectionDatabase.cs" />
     <Compile Include="Models\LeDucThien\Entity\ent_KhachHang.cs" />
     <Compile Include="Models\LeDucThien\ProcessData\pd_KhachHang.cs" />
+    <Compile Include="Models\LeMinhToan\Entity\ent_SanPham.cs" />
+    <Compile Include="Models\LeMinhToan\ProcessData\dk_KhachHang.cs" />
+    <Compile Include="Models\LeMinhToan\ProcessData\pd_SanPham.cs" />
     <Compile Include="Models\OtherMethods\CookieHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -363,7 +366,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
     <Folder Include="Models\DangNgocDung\" />
-    <Folder Include="Models\LeMinhToan\" />
     <Folder Include="Models\TranNguyenNhatThong\" />
     <Folder Include="Models\TranPhuocLoc\" />
   </ItemGroup>
