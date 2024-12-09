@@ -1,24 +1,28 @@
-﻿using System;
-
-namespace FashionShop.Models.LeDucThien.ThienEntity
+﻿namespace FashionShop.Models.LeDucThien.ThienEntity
 {
     public class ent_VoucherCuaToi
     {
-        public string maVoucherCuaToi { get; set; }
-        public string maVoucher { get; set; }
-        public string maAccount { get; set; }
-        public string trangThaiSuDung { get; set; }
+        public string MaVoucherCuaToi { get; set; } // Mã voucher của tôi
+        public string MaVoucher { get; set; } // Mã voucher
+        public string TenVoucher { get; set; } // Tên voucher
+        public string HanSuDung { get; set; } // Hạn sử dụng voucher (định dạng dd/MM/yyyy)
+        public int MucGiam { get; set; } // Mức giảm giá
+        public string DieuKienGiam { get; set; } // Điều kiện giảm giá
+        public string TrangThaiSuDung { get; set; } // Trạng thái sử dụng voucher
 
-        // Constructor đầy đủ
-        public ent_VoucherCuaToi(string maVoucherCuaToi, string maVoucher, string maAccount, string trangThaiSuDung)
+        public ent_VoucherCuaToi(string maVoucherCuaToi, string maVoucher, string tenVoucher, string hanSuDung, int mucGiam, string dieuKienGiam, string trangThaiSuDung)
         {
-            this.maVoucherCuaToi = maVoucherCuaToi;
-            this.maVoucher = maVoucher;
-            this.maAccount = maAccount;
-            this.trangThaiSuDung = trangThaiSuDung;
+            MaVoucherCuaToi = maVoucherCuaToi;
+            MaVoucher = maVoucher;
+            TenVoucher = tenVoucher;
+            HanSuDung = hanSuDung;
+            MucGiam = mucGiam;
+            DieuKienGiam = dieuKienGiam;
+            TrangThaiSuDung = trangThaiSuDung;
         }
 
-        // Constructor rỗng
-        public ent_VoucherCuaToi() { }
+        public ent_VoucherCuaToi()
+        {
+        }
     }
 }

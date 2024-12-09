@@ -111,5 +111,71 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
             return list; // Trả về danh sách khách hàng tìm thấy
         }
 
+        public void CapNhatKhachHang(string username, string firstName,
+            string lastName, int day, int moth, int year, string gender)
+        {
+            string procedureName = "pr_CapNhatKhachHang"; // Tên stored procedure
+
+            using (SqlConnection connection = con.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(procedureName, connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure // Đặt kiểu là stored procedure
+                    };
+
+                    // Thêm tham số đầu vào cho stored procedure
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@firstName", firstName);
+                    cmd.Parameters.AddWithValue("@lastName", lastName);
+                    cmd.Parameters.AddWithValue("@day", day);
+                    cmd.Parameters.AddWithValue("@moth", moth);
+                    cmd.Parameters.AddWithValue("@year", year);
+                    cmd.Parameters.AddWithValue("@gender", gender);
+
+                    cmd.ExecuteNonQuery(); // Thực thi stored procedure
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý lỗi: Ghi log hoặc ném lại lỗi
+                    Console.WriteLine("Lỗi khi cập nhật dữ liệu: " + ex.Message);
+                    throw; // Nếu cần ném lại lỗi cho cấp trên xử lý
+                }
+            }
+        }
+
+        public void CapNhatAnhKhachHang(string username, string avatar)
+        {
+            string procedureName = "pr_CapNhatAnhKhachHang"; // Tên stored procedure
+
+            using (SqlConnection connection = con.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(procedureName, connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure
+                    };
+
+                    // Thêm tham số cho stored procedure
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@anh", avatar);
+
+                    cmd.ExecuteNonQuery(); // Thực thi stored procedure
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý lỗi nếu có
+                    Console.WriteLine("Lỗi khi cập nhật ảnh: " + ex.Message);
+                    throw;
+                }
+            }
+        }
     }
+
 }

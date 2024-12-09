@@ -7,107 +7,88 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card p-4">
-                <h3 class="text-center mb-4">Hồ Sơ</h3>
+            <form method="post" action="@Url.Action("CapNhatHoSo", "MyAccount")" enctype="multipart/form-data">
+                <div class="card p-4">
+                    <h3 class="text-center mb-4">Hồ Sơ</h3>
 
-                <!-- Tên đăng nhập -->
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="username" name="username" value="@ViewBag.Username" readonly>
-                </div>
-
-                <div class="mb-3">
-                    <div class="row">
-                        <div class="col-6">
-                            <input type="text" class="form-control" id="firstname" name="firstname" value="@ViewBag.FirstName">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control" id="lastname" name="lastname" value="@ViewBag.LastName">
-                        </div>
+                    <!-- Tên đăng nhập -->
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="username" name="username" value="@ViewBag.Username" readonly>
                     </div>
-                </div>
-                <!-- Ngày sinh -->
-                <div class="mb-3">
-                    <label for="dateOfBirth" class="form-label">Ngày Sinh</label>
-                    <div class="row">
-                        <div class="col-4">
-                            <select class="form-control" id="day" name="day">
-                                @for (int i = 1; i <= 31; i++)
-                                {
-                                    if (i == @ViewBag.Day)
-                                    {
-                                        <option value="@i" selected>@i</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                        <div class="col-4">
-                            <select class="form-control" id="month" name="month">
-                                @for (int i = 1; i <= 12; i++)
-                                {
-                                    if (i == @ViewBag.Month)
-                                    {
-                                        <option value="@i" selected>@i</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                }
-                                
-                            </select>
-                        </div>
-                        <div class="col-4">
-                            <select class="form-control" id="year" name="year">
-                                @for (int i = DateTime.Now.Year - 100; i <= DateTime.Now.Year; i++)
-                                {
-                                    if (i == @ViewBag.Year)
-                                    {
-                                        <option value="@i" selected>@i</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@i">@i</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Giới tính -->
-                <div class="mb-3">
-                    <label class="form-label">Giới Tính</label>
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="genderMale" name="gender" value="Nam" @(ViewBag.Gender == "Nam" ? "checked" : "")>
-                                <label class="form-check-label" for="genderMale">Nam</label>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" class="form-control" id="firstname" name="firstname" value="@ViewBag.FirstName">
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="genderFemale" name="gender" value="Nữ" @(ViewBag.Gender == "Nữ" ? "checked" : "")>
-                                <label class="form-check-label" for="genderFemale">Nữ</label>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="genderOther" name="gender" value="Khác" @(ViewBag.Gender == "Khác" ? "checked" : "")>
-                                <label class="form-check-label" for="genderOther">Khác</label>
+                            <div class="col-6">
+                                <input type="text" class="form-control" id="lastname" name="lastname" value="@ViewBag.LastName">
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Nút Cập nhật -->
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                    <!-- Ngày sinh -->
+                    <div class="mb-3">
+                        <label for="dateOfBirth" class="form-label">Ngày Sinh</label>
+                        <div class="row">
+                            <div class="col-4">
+                                <select class="form-control" id="day" name="day">
+                                    @for (int i = 1; i <= 31; i++)
+                                    {
+                                        <option value="@i" @(i == ViewBag.Day ? "selected" : "")>@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-control" id="month" name="month">
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                        <option value="@i" @(i == ViewBag.Month ? "selected" : "")>@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-control" id="year" name="year">
+                                    @for (int i = DateTime.Now.Year - 100; i <= DateTime.Now.Year; i++)
+                                    {
+                                        <option value="@i" @(i == ViewBag.Year ? "selected" : "")>@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Giới tính -->
+                    <div class="mb-3">
+                        <label class="form-label">Giới Tính</label>
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="radio" id="genderMale" name="gender" value="Nam" @(ViewBag.Gender == "Nam" ? "checked" : "")>
+                                <label for="genderMale">Nam</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="radio" id="genderFemale" name="gender" value="Nữ" @(ViewBag.Gender == "Nữ" ? "checked" : "")>
+                                <label for="genderFemale">Nữ</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="radio" id="genderOther" name="gender" value="Khác" @(ViewBag.Gender == "Khác" ? "checked" : "")>
+                                <label for="genderOther">Khác</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" @Html.Raw(TempData["ErrorMessage"] != null ? "" : "hidden")>
+                        @TempData["ErrorMessage"]
+                    </div>
+
+                    <!-- Nút Cập nhật -->
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary" id="btnSuccessHoSo">
+                            Cập Nhật
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="col-md-4 d-flex justify-content-center align-items-center">
@@ -115,10 +96,39 @@
             <div class="profile-container text-center d-flex flex-column align-items-center">
                 <!-- Ảnh người dùng -->
                 <div class="mb-3">
-                    <img src="@Url.Content("~/img/" + ViewBag.Avatar)" alt="User Avatar" class="rounded rounded-circle border-dark" style="width: 150px; height: 150px; object-fit: cover;">
+                    <img src="@Url.Content(ViewBag.Avatar)" alt="User Avatar" class="rounded rounded-circle border-dark" style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
-                <!-- Nút cập nhật ảnh -->
-                <button type="button" class="btn btn-primary">Thay đổi</button>
+
+                <!-- Form để tải ảnh -->
+                <form method="post" action="@Url.Action("CapNhatAnhHoSo", "MyAccount")" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <!-- Ẩn input file và chỉ hiển thị nút "Thay đổi" -->
+                        <input type="file" name="avatar" id="fileAvartaInput" accept="image/*" class="form-control" hidden>
+                    </div>
+
+                    <!-- Nút Cập nhật ảnh, ẩn nếu không có file -->
+                    <button type="submit" class="btn btn-primary" id="submitButtonChangeAvarta">Cập nhật ảnh</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="SuccessChangeAvatar" tabindex="-1" role="dialog" aria-labelledby="SuccessChangeAvatarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SuccessChangeAvatarLabel">Cập nhật thành công!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Thông tin đã được cập nhật thành công. Bạn có thể xem lại hồ sơ của mình.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>

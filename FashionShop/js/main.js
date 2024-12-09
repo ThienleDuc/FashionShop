@@ -97,4 +97,92 @@
             }
         });
     });
+
+    $(function () {
+        var maNganHangLienKet = null;  // Mã ngân hàng liên kết
+        var soTaiKhoan = null;          // Số tài khoản ngân hàng
+
+        // Khi chọn ngân hàng từ dropdown
+        $('#bankSelect').change(function () {
+            maNganHangLienKet = parseInt($(this).val(), 10);  // Lấy giá trị mã ngân hàng liên kết
+
+            // Gửi yêu cầu AJAX để lấy danh sách chi nhánh của ngân hàng
+            $.ajax({
+                url: '/MyAccount/LayMaChiNhanh',  // Địa chỉ API để lấy danh sách chi nhánh
+                type: 'GET',
+                data: { maNganHangLienKet: maNganHangLienKet },  // Gửi mã ngân hàng liên kết
+                success: function (data) {
+                    console.log(data);  // Debug: kiểm tra dữ liệu trả về
+
+                    // Xóa các chi nhánh cũ trong dropdown
+                    $('#branch').empty();
+
+                    // Thêm lại placeholder cho dropdown chi nhánh
+                    $('#branch').append('<option value="" disabled selected>Chọn Chi Nhánh</option>');
+
+                    // Duyệt qua danh sách chi nhánh trả về và thêm vào dropdown
+                    $.each(data, function (index, item) {
+                        $('#branch').append(`<option value="${item.MaChiNhanh}">${item.TenChiNhanh}</option>`);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Lỗi khi gọi API: ", status, error);
+                    alert('Lỗi khi tải chi nhánh ngân hàng');
+                }
+            });
+        });
+
+        // Khi người dùng rời khỏi trường nhập số tài khoản
+        $('#accountNumber').on('blur', function () {
+            soTaiKhoan = $(this).val();  // Lấy giá trị số tài khoản từ trường nhập
+
+            if (soTaiKhoan) {
+                // Gửi yêu cầu AJAX để lấy tên chủ sở hữu tài khoản
+                $.ajax({
+                    url: '/MyAccount/GetTenChuSoHuuBySoTaiKhoan',  // Địa chỉ API để lấy tên chủ sở hữu
+                    type: 'GET',
+                    data: { soTaiKhoan: soTaiKhoan, maNganHangLienKet: maNganHangLienKet },  // Gửi số tài khoản và mã ngân hàng liên kết
+                    success: function (data) {
+                        if (data.success) {
+                            // Nếu trả về tên chủ sở hữu, hiển thị
+                            $('#accountOwner').text('Chủ sở hữu: ' + data.tenChuSoHuu);
+                        } else {
+                            // Nếu không có kết quả, hiển thị thông báo không tồn tại tài khoản này
+                            $('#accountOwner').removeAttr('hidden');
+                            $('#accountOwner').text('Không tồn tại tài khoản này.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi khi gọi API: ", status, error);
+                        $('#accountOwner').text('Lỗi khi kiểm tra tài khoản.');
+                    }
+                });
+            }
+        });
+    });
+
+
+    $(document).ready(function () {
+        // Khi modal delete được mở
+        $('#deleteBankModal').on('show.bs.modal', function (e) {
+            var maTaiKhoan = $(e.relatedTarget).data('maTaiKhoan');
+            if (maTaiKhoan) {
+                // Chuyển giá trị sang int (nếu cần) và gán vào input hidden
+                $('#maTaiKhoanToDelete').val(parseInt(maTaiKhoan));
+            }
+        });
+
+        // Khi người dùng xác nhận xóa, form sẽ được submit
+        $('#deleteBankForm').on('submit', function (e) {
+            e.preventDefault();
+            var maTaiKhoan = $('#maTaiKhoanToDelete').val();
+            if (maTaiKhoan) {
+                // Xử lý gửi request POST đến controller
+                // Chạy thêm các logic AJAX hoặc form submit thông thường.
+                this.submit();
+            }
+        });
+    });
+
+
 })(jQuery);

@@ -8,61 +8,31 @@
     <h2 class="text-center mb-4">Danh Sách Voucher Giảm Giá</h2>
 
     <!-- Ô nhập mã và nút lưu -->
-    <div class="d-flex justify-content-center mb-4">
-        <input type="text" class="form-control w-50 mr-2" placeholder="Nhập mã voucher của bạn" id="voucherInput">
-        <button class="btn btn-primary">Lưu</button>
-    </div>
+    <form method="post" action="@Url.Action("ThemVoucher", "Voucher")">
+        <div class="d-flex justify-content-center mb-4">
+            <input type="text" class="form-control w-50 mr-2" placeholder="Nhập mã voucher của bạn" name="maVoucher" id="voucherInput">
+            <button type="submit" class="btn btn-primary">Lưu</button>
+        </div>
+    </form>
 
     <div class="row">
-        <!-- Voucher 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header text-center bg-info text-white">
-                    <h5>Giảm 10%</h5>
-                </div>
-                <div class="card-body">
-                    <p><strong>Mã:</strong> SAVE10</p>
-                    <p><strong>Hạn sử dụng:</strong> 30/11/2024</p>
-                    <p><strong>Điều kiện:</strong> Đơn hàng tối thiểu 200,000 VND</p>
-                </div>
-                <div class="card-footer text-center">
-                    <button class="btn btn-success btn-sm">Sử Dụng Ngay</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Voucher 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header text-center bg-primary text-white">
-                    <h5>Giảm 50,000 VND</h5>
-                </div>
-                <div class="card-body">
-                    <p><strong>Mã:</strong> SAVE50</p>
-                    <p><strong>Hạn sử dụng:</strong> 15/12/2024</p>
-                    <p><strong>Điều kiện:</strong> Áp dụng cho tất cả sản phẩm</p>
-                </div>
-                <div class="card-footer text-center">
-                    <button class="btn btn-success btn-sm">Sử Dụng Ngay</button>
+        @foreach (var voucher in ViewBag.voucherCuaToi)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header text-center bg-info text-white">
+                        <h5>@voucher.TenVoucher</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Mã:</strong> @voucher.MaVoucher</p>
+                        <p><strong>Hạn sử dụng:</strong> @voucher.HanSuDung</p>
+                        <p><strong>Điều kiện:</strong> @voucher.DieuKienGiam</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-success btn-sm">Sử Dụng Ngay</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Voucher 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header text-center bg-danger text-white">
-                    <h5>Giảm 20%</h5>
-                </div>
-                <div class="card-body">
-                    <p><strong>Mã:</strong> SAVE20</p>
-                    <p><strong>Hạn sử dụng:</strong> 31/12/2024</p>
-                    <p><strong>Điều kiện:</strong> Đơn hàng từ 500,000 VND</p>
-                </div>
-                <div class="card-footer text-center">
-                    <button class="btn btn-success btn-sm">Sử Dụng Ngay</button>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>

@@ -16,26 +16,29 @@
         </div>
     </div>
 
-    <div class="card p-4">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <div class="mb-2">
-                    <h6 class="mb-0">
-                        <strong>@ViewBag.TenKhachHang</strong><span> | @ViewBag.SDT</span>
-                    </h6>
+    @foreach (var diaChi in ViewBag.diaChiList)
+    {
+        <div class="card p-4 mb-3">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="mb-2">
+                        <h6 class="mb-0">
+                            <strong>@diaChi.TenKhachHang</strong><span> | @diaChi.SDT</span>
+                        </h6>
+                    </div>
+                    <div class="mb-2">
+                        <p>@diaChi.DiaChiGiaoHang</p>
+                    </div>
                 </div>
-                <div class="mb-2">
-                    <p>@ViewBag.DiaChi</p>
+                <div class="col-md-2 text-center">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateAddressModal">Cập nhật</button>
+                </div>
+                <div class="col-md-2 text-center">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAddressModal">Xóa</button>
                 </div>
             </div>
-            <div class="col-md-2 text-center">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateAddressModal">Cập nhật</button>
-            </div>
-            <div class="col-md-2 text-center">
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAddressModal">Xóa</button>
-            </div>
-        </div>
     </div>
+    }
 </div>
 
 <!-- Modal Thêm Địa Chỉ -->

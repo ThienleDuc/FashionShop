@@ -10,9 +10,9 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
         private ConnectionDatabase con = new ConnectionDatabase(); // Khởi tạo đối tượng ConnectionDatabase
 
         // Phương thức lấy ngân hàng theo điều kiện (Ví dụ: theo mã ngân hàng)
-        public List<ent_NganHangDuocLienKet> GetNganHangDuocLienKetWhereMaNganHangLienKet (int condition)
+        public List<ent_NganHangDuocLienKet> GetNganHangDuocLienKet ()
         {
-            string query = "SELECT * FROM NganHangDuocLienKet WHERE MaNganHangLienKet = @MaNganHangLienKet";
+            string query = "SELECT * FROM NganHangDuocLienKet";
             List<ent_NganHangDuocLienKet> list = new List<ent_NganHangDuocLienKet>();
 
             using (SqlConnection connection = con.GetConnection())
@@ -22,7 +22,6 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
                     connection.Open();
 
                     SqlCommand cmd = new SqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@MaNganHangLienKet", condition);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 

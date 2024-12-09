@@ -10,7 +10,7 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
         private ConnectionDatabase con = new ConnectionDatabase();
        
         // Phương thức lấy TenChuSoHuu từ số tài khoản sử dụng function SQL
-        public string GetTenChuSoHuuBySoTaiKhoan(string soTaiKhoan)
+        public string GetTenChuSoHuuBySoTaiKhoan(string soTaiKhoan, int maNganHangLienKet)
         {
             string query = "SELECT dbo.GetTenChuSoHuu(@SoTaiKhoan)"; // Sử dụng function GetTenChuSoHuu
             string tenChuSoHuu = null;
@@ -25,6 +25,7 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
                     // Thực hiện câu truy vấn với tham số
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@SoTaiKhoan", soTaiKhoan); // Thêm tham số số tài khoản
+                    cmd.Parameters.AddWithValue("@MaNganHangLienKet", maNganHangLienKet);
 
                     // Thực thi và lấy giá trị trả về
                     tenChuSoHuu = cmd.ExecuteScalar()?.ToString(); // ExecuteScalar để lấy giá trị trả về từ function

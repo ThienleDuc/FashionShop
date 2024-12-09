@@ -183,7 +183,7 @@ CREATE TABLE ThongBao (
 -- 18: Voucher
 CREATE TABLE Voucher (
 	maVoucher VARCHAR(10) PRIMARY KEY,
-	tenVoucher VARCHAR(50),
+	tenVoucher NVARCHAR(50),
 	hanSuDung DATE,
 	mucGiam INT,
     MaDieuKien INT,
@@ -193,7 +193,8 @@ CREATE TABLE Voucher (
 -- 19: DieuKienGiam
 CREATE TABLE DieuKienGiam (
     maDieuKien INT PRIMARY KEY IDENTITY(1,1),
-    DieuKien NVARCHAR(50)
+    DieuKien NVARCHAR(50),
+	MucDieuKienGiam INT
 );
 
 -- 20: TrangThaiGiam
@@ -203,7 +204,7 @@ CREATE TABLE TrangThaiGiam (
 );
 
 CREATE TABLE VoucherCuaToi (
-    maVoucherCuaToi VARCHAR(10) PRIMARY KEY,
+    maVoucherCuaToi INT PRIMARY KEY IDENTITY(1,1),
 	maVoucher VARCHAR(10), -- làm khóa ngoại
     maAccount VARCHAR(255), -- làm khóa ngoại
 	trangThaiSuDung NVARCHAR(255)

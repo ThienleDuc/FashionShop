@@ -9,48 +9,60 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
     {
         private readonly ConnectionDatabase con = new ConnectionDatabase();
 
-        // Phương thức lấy địa chỉ giao hàng theo điều kiện
-        public List<ent_DiaChiGiaoHang> GetDiaChiGiaoHangWhere(string maAccount)
+        public List<ent_DiaChiGiaoHang> GetDiaChiGiaoHangByAccount(string maAccount)
         {
-            string query = "SELECT * FROM DiaChiGiaoHang WHERE MaAccount = @MaAccount";
-            List<ent_DiaChiGiaoHang> list = new List<ent_DiaChiGiaoHang>();
+            List<ent_DiaChiGiaoHang> diaChiList = new List<ent_DiaChiGiaoHang>(); // Danh sách kết quả
 
+            string procedureName = "GetDiaChiGiaoHangByAccount"; // Tên stored procedure
+
+            // Tạo kết nối tới cơ sở dữ liệu
             using (SqlConnection connection = con.GetConnection())
             {
                 try
                 {
-                    connection.Open();
+                    connection.Open(); // Mở kết nối
 
-                    SqlCommand cmd = new SqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@MaAccount", maAccount);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    // Khởi tạo command để gọi stored procedure
+                    SqlCommand cmd = new SqlCommand(procedureName, connection)
                     {
-                        while (reader.Read())
-                        {
-                            ent_DiaChiGiaoHang diaChi = new ent_DiaChiGiaoHang
-                            {
-                                MaDiaChi = Convert.ToInt32(reader["MaDiaChi"]),
-                                MaAccount = reader["MaAccount"].ToString(),
-                                MaTinhThanh = Convert.ToInt32(reader["MaTinhThanh"]),
-                                MaQuanHuyen = Convert.ToInt32(reader["MaQuanHuyen"]),
-                                MaXaPhuong = Convert.ToInt32(reader["MaXaPhuong"]),
-                                TenKhachHang = reader["TenKhachHang"].ToString(),
-                                SDT = reader["SDT"].ToString(),
-                                DiaChiGiaoHang = reader["DiaChiGiaoHang"].ToString()
-                            };
+                        CommandType = System.Data.CommandType.StoredProcedure // Đặt kiểu là stored procedure
+                    };
 
-                            list.Add(diaChi);
-                        }
+                    // Thêm tham số cho stored procedure
+                    cmd.Parameters.AddWithValue("@maAccount", maAccount);
+
+                    // Thực thi và lấy kết quả trả về
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    // Đọc kết quả trả về từ SQL
+                    while (reader.Read())
+                    {
+                        // Tạo đối tượng ent_DiaChiGiaoHang từ dữ liệu trong mỗi bản ghi
+                        ent_DiaChiGiaoHang diaChi = new ent_DiaChiGiaoHang
+                        {
+                            MaDiaChi = Convert.ToInt32(reader["MaDiaChi"]),
+                            TenTinhThanh = reader["TenTinhThanh"].ToString(),
+                            TenQuanHuyen = reader["TenQuanHuyen"].ToString(),
+                            TenXaPhuong = reader["TenXaPhuong"].ToString(),
+                            TenKhachHang = reader["TenKhachHang"].ToString(),
+                            SDT = reader["SDT"].ToString(),
+                            DiaChiGiaoHang = reader["DiaChiGiaoHang"].ToString()
+                        };
+
+                        // Thêm đối tượng vào danh sách kết quả
+                        diaChiList.Add(diaChi);
                     }
+
+                    reader.Close(); // Đóng SqlDataReader
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Lỗi khi truy vấn dữ liệu: " + ex.Message);
+                    Console.WriteLine("Lỗi khi gọi stored procedure: " + ex.Message);
                 }
             }
 
-            return list;
+            return diaChiList; // Trả về danh sách kết quả
         }
+
     }
 }

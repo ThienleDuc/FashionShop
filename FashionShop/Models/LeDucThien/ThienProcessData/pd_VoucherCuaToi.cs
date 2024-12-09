@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using FashionShop.Models.LeDucThien.ThienEntity;
 
@@ -9,68 +10,85 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
     {
         private ConnectionDatabase con = new ConnectionDatabase(); // Khởi tạo đối tượng ConnectionDatabase
 
-        // Phương thức lấy voucher của tôi theo maAccount
-        public List<ent_VoucherCuaToi> GetVoucherCuaToiByAccount(string maAccount)
+        public List<ent_VoucherCuaToi> GetVoucherCuaToi(string maAccount)
         {
-            string query = "SELECT * FROM VoucherCuaToi WHERE maAccount = @maAccount";
-            List<ent_VoucherCuaToi> list = new List<ent_VoucherCuaToi>();
+            List<ent_VoucherCuaToi> vouchers = new List<ent_VoucherCuaToi>();
 
             using (SqlConnection connection = con.GetConnection())
             {
                 try
                 {
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@maAccount", maAccount);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
+                    using (SqlCommand cmd = new SqlCommand("pr_VoucherCuaToi", connection))
                     {
-                        ent_VoucherCuaToi voucherCuaToi = new ent_VoucherCuaToi
-                        {
-                            maVoucherCuaToi = reader["maVoucherCuaToi"].ToString(),
-                            maVoucher = reader["maVoucher"].ToString(),
-                            maAccount = reader["maAccount"].ToString(),
-                            trangThaiSuDung = reader["trangThaiSuDung"].ToString()
-                        };
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        list.Add(voucherCuaToi);
+                        // Thêm tham số đầu vào cho stored procedure
+                        cmd.Parameters.AddWithValue("@maAccount", maAccount);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Lấy dữ liệu từ reader và tạo đối tượng ent_VoucherCuaToi
+                                ent_VoucherCuaToi voucher = new ent_VoucherCuaToi
+                                {
+                                    MaVoucherCuaToi = reader["maVoucherCuaToi"].ToString(),
+                                    MaVoucher = reader["maVoucher"].ToString(),
+                                    TenVoucher = reader["tenVoucher"].ToString(),
+                                    HanSuDung = reader["hanSuDung"].ToString(), // Định dạng dd/MM/yyyy đã được xử lý trong stored procedure
+                                    MucGiam = Convert.ToInt32(reader["mucGiam"]),
+                                    DieuKienGiam = reader["DieuKienGiam"].ToString(),
+                                    TrangThaiSuDung = reader["trangThaiSuDung"].ToString()
+                                };
+
+                                vouchers.Add(voucher); // Thêm vào danh sách
+                            }
+                        }
                     }
-                    reader.Close();
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Lỗi khi truy vấn dữ liệu: " + ex.Message);
+                    Console.WriteLine("Lỗi khi lấy dữ liệu voucher: " + ex.Message);
+                    throw;
                 }
             }
 
-            return list;
+            return vouchers;
         }
 
-        // Phương thức cập nhật trạng thái voucher của tôi
-        public bool UpdateTrangThaiSuDung(string maVoucherCuaToi, string trangThaiSuDung)
+        public void ThemMaVoucherCuaToi(string maVoucher, string maAccount)
         {
-            string query = "UPDATE VoucherCuaToi SET trangThaiSuDung = @trangThaiSuDung WHERE maVoucherCuaToi = @maVoucherCuaToi";
-
+            // Mở kết nối đến cơ sở dữ liệu
             using (SqlConnection connection = con.GetConnection())
             {
                 try
                 {
+                    // Mở kết nối
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@maVoucherCuaToi", maVoucherCuaToi);
-                    cmd.Parameters.AddWithValue("@trangThaiSuDung", trangThaiSuDung);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    // Khai báo đối tượng SqlCommand để gọi stored procedure pr_ThemMaVoucherCuaToi
+                    using (SqlCommand cmd = new SqlCommand("pr_ThemMaVoucherCuaToi", connection))
+                    {
+                        // Đặt kiểu lệnh là Stored Procedure
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Thêm tham số vào cho stored procedure
+                        cmd.Parameters.AddWithValue("@maVoucher", maVoucher);
+                        cmd.Parameters.AddWithValue("@maAccount", maAccount);
+
+                        // Thực thi lệnh Insert trong stored procedure
+                        cmd.ExecuteNonQuery();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Lỗi khi cập nhật trạng thái voucher: " + ex.Message);
-                    return false;
+                    // Nếu có lỗi, in ra lỗi
+                    Console.WriteLine("Lỗi khi thêm voucher: " + ex.Message);
                 }
             }
         }
-        
+
     }
+
 }

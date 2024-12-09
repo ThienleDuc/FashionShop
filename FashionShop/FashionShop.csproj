@@ -163,6 +163,7 @@
     <Compile Include="Models\LeDucThien\ThienEntity\ent_QuanHuyen.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TaiKhoanNganHangCuaToi.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TaiKhoanNganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_ThemVoucherCuaToi.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TinhThanhPho.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TrangThaiGiam.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_Voucher.cs" />
@@ -203,6 +204,7 @@
     <Content Include="img\cat-4.jpg" />
     <Content Include="img\cat-5.jpg" />
     <Content Include="img\cat-6.jpg" />
+    <Content Include="img\elmu-avtar.jpg" />
     <Content Include="img\logo-VietinBank.png" />
     <Content Include="img\offer-1.png" />
     <Content Include="img\offer-2.png" />
@@ -389,7 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Database\" />
+    <Folder Include="Database\LeDucThien\" />
     <Folder Include="Models\DangNgocDung\" />
     <Folder Include="Models\LeMinhToan\" />
     <Folder Include="Models\TranNguyenNhatThong\" />

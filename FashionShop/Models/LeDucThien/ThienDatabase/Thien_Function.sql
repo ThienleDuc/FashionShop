@@ -20,22 +20,27 @@ END;
 GO
 SELECT dbo.fn_GetMaNganHangLienKet(N'Ngân Hàng Công Thương');
 GO
-CREATE FUNCTION GetTenChuSoHuu (@SoTaiKhoan VARCHAR(14))
+CREATE FUNCTION GetTenChuSoHuu 
+(
+    @SoTaiKhoan VARCHAR(14), 
+    @MaNganHangLienKet INT
+)
 RETURNS NVARCHAR(50)
 AS
 BEGIN
     DECLARE @TenChuSoHuu NVARCHAR(50);
     
-    -- Truy vấn dữ liệu từ bảng TaiKhoanNganHangDuocLienKet
+    -- Truy vấn dữ liệu từ bảng TaiKhoanNganHangDuocLienKet với cả SoTaiKhoan và MaNganHangLienKet
     SELECT @TenChuSoHuu = TenChuSoHuu
     FROM TaiKhoanNganHangDuocLienKet
-    WHERE SoTaiKhoan = @SoTaiKhoan;
+    WHERE SoTaiKhoan = @SoTaiKhoan
+    AND MaNganHangLienKet = @MaNganHangLienKet;
     
     -- Trả về kết quả
     RETURN @TenChuSoHuu;
 END;
 GO
-SELECT dbo.GetTenChuSoHuu('12345678901234');
+SELECT dbo.GetTenChuSoHuu('12345678901234', 1);
 GO
 CREATE FUNCTION GetTenTinhThanh (@MaTinhThanh INT)
 RETURNS NVARCHAR(255)

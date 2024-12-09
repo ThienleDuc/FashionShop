@@ -61,3 +61,29 @@ VALUES
 ('LeDucThien', 3, 4, 7, N'Lê Đức Thiện', '0903456789', N'Số 10, Hòa Cường Bắc, Hải Châu, Đà Nẵng');
 
 GO
+-- Thêm dữ liệu vào bảng DieuKienGiam
+INSERT INTO DieuKienGiam (DieuKien, MucDieuKienGiam)
+VALUES 
+(N'Đơn hàng tối thiểu 100K', 100000),
+(N'Đơn hàng tối thiểu 200K', 200000),
+(N'Đơn hàng tối thiểu 500K', 500000);
+GO
+-- Thêm dữ liệu vào bảng TrangThaiGiam
+INSERT INTO TrangThaiGiam (trangThaiGiam)
+VALUES 
+(N'Phần trăm'),
+(N'Giá tiền');
+GO
+-- Thêm dữ liệu vào bảng Voucher
+INSERT INTO Voucher (maVoucher, tenVoucher, hanSuDung, mucGiam, MaDieuKien, maTrangThaiGiam)
+VALUES 
+('VC001', N'Giảm 10%', '2024-12-31', 10, 1, 1),
+('VC002', N'Giảm 20%', '2024-12-15', 20, 2, 1),
+('VC003', N'Giảm 50K', '2024-11-30', 50000, 3, 2);
+GO
+-- Thêm dữ liệu vào bảng VoucherCuaToi chỉ với maVoucher và maAccount
+INSERT INTO VoucherCuaToi (maVoucher, maAccount)
+VALUES 
+('VC001', 'LeDucThien'),
+('VC002', 'LeDucThien'),
+('VC003', 'LeDucThien');

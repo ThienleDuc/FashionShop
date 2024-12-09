@@ -3,28 +3,26 @@
     public class ent_DiaChiGiaoHang
     {
         public int MaDiaChi { get; set; }
-        public string MaAccount { get; set; }
-        public int MaTinhThanh { get; set; }
-        public int MaQuanHuyen { get; set; }
-        public int MaXaPhuong { get; set; }
+        public string TenTinhThanh { get; set; }
+        public string TenQuanHuyen { get; set; }
+        public string TenXaPhuong { get; set; }
         public string TenKhachHang { get; set; }
         public string SDT { get; set; }
         public string DiaChiGiaoHang { get; set; }
 
-        // Constructor đầy đủ
-        public ent_DiaChiGiaoHang(int maDiaChi, string maAccount, int maTinhThanh, int maQuanHuyen, int maXaPhuong, string tenKhachHang, string sdt, string diaChiGiaoHang)
+        public ent_DiaChiGiaoHang(int maDiaChi, string tenTinhThanh, string tenQuanHuyen, string tenXaPhuong, string tenKhachHang, string sDT, string diaChiGiaoHang)
         {
             MaDiaChi = maDiaChi;
-            MaAccount = maAccount;
-            MaTinhThanh = maTinhThanh;
-            MaQuanHuyen = maQuanHuyen;
-            MaXaPhuong = maXaPhuong;
+            TenTinhThanh = tenTinhThanh;
+            TenQuanHuyen = tenQuanHuyen;
+            TenXaPhuong = tenXaPhuong;
             TenKhachHang = tenKhachHang;
-            SDT = sdt;
+            SDT = sDT;
             DiaChiGiaoHang = diaChiGiaoHang;
         }
 
-        // Constructor rỗng
-        public ent_DiaChiGiaoHang() { }
+        public ent_DiaChiGiaoHang()
+        {
+        }
     }
 }
