@@ -12,3 +12,4 @@ BEGIN
     INNER JOIN INSERTED i ON vc.maVoucherCuaToi = i.maVoucherCuaToi
     WHERE vc.trangThaiSuDung IS NULL;
 END;
+GO

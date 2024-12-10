@@ -1,18 +1,16 @@
 ﻿@{
     Layout = null;
-    HttpCookie usernameCookie = Request.Cookies["Username"];
-    var username = usernameCookie != null ? usernameCookie.Value : string.Empty;
-
 }
 
 <div class="p-0 d-flex align-items-center">
     <div class="p-3">
-        <img src="~/img/product-1.jpg" alt="Avatar" class="rounded rounded-circle border-dark" style="width: 50px; height: 50px; object-fit: cover;">
+        <img src="@Url.Content(ViewBag.AnhSideBar)" alt="Avatar" class="rounded rounded-circle border-dark" style="width: 50px; height: 50px; object-fit: cover;">
     </div>
     <div class="ml-3">
-        <h6>@username</h6>
+        <h6>@ViewBag.UsernameSideBar</h6>
     </div>
 </div>
+
 
 <nav class="navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0">
     <div class="navbar-nav w-100 overflow-hidden">

@@ -82,5 +82,39 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
                 }
             }
         }
+
+        public void ThemTaiKhoanNganHang(ent_ThemTaiKhoanNganHang taiKhoan)
+        {
+            string procedureName = "pr_ThemTaiKhoanNganHangCuaToi"; 
+            using (SqlConnection connection = con.GetConnection())
+            {
+                try
+                {
+                    connection.Open(); // Mở kết nối cơ sở dữ liệu
+
+                    // Tạo đối tượng SqlCommand để gọi stored procedure
+                    SqlCommand cmd = new SqlCommand(procedureName, connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure
+                    };
+
+                    // Thêm tham số vào command
+                    cmd.Parameters.AddWithValue("@MaAccount", taiKhoan.MaAccount);
+                    cmd.Parameters.AddWithValue("@MaNganHangLienKet", taiKhoan.MaNganHangLienKet);
+                    cmd.Parameters.AddWithValue("@SoTaiKhoan", taiKhoan.SoTaiKhoan);
+                    cmd.Parameters.AddWithValue("@TenChuSoHuu", taiKhoan.TenChuSoHuu);
+                    cmd.Parameters.AddWithValue("@TenChiNhanh", taiKhoan.TenChiNhanh);
+
+                    // Thực thi câu lệnh
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Lỗi khi thêm tài khoản ngân hàng: " + ex.Message);
+                    throw; 
+                }
+            }
+        }
+
     }
 }

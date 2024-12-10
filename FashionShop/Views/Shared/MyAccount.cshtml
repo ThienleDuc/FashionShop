@@ -1,6 +1,17 @@
 ﻿
+@using FashionShop.Models.LeDucThien.ThienProcessData;
 @{
     Layout = null;
+
+    HttpCookie usernameCookie = Request.Cookies["Username"];
+    var username = usernameCookie != null ? usernameCookie.Value : string.Empty;
+
+    pd_KhachHang khachHangProcess = new pd_KhachHang();
+
+    var user = khachHangProcess.GetKhachHangWhere(username).FirstOrDefault();
+
+    ViewBag.AnhSideBar = user.Anh;
+    ViewBag.UsernameSideBar = user.Username;
 }
 
 <!DOCTYPE html>

@@ -156,13 +156,17 @@
     </Compile>
     <Compile Include="Models\ConnectionDatabase.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_ChiNhanhNganHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_ChiTietDonHang.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_DiaChiGiaoHang.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_DieuKienGiam.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_DonHang.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_KhachHang.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_NganHangDuocLienKet.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_QuanHuyen.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TaiKhoanNganHangCuaToi.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TaiKhoanNganHangDuocLienKet.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_ThemDiaChiGiaoHang.cs" />
+    <Compile Include="Models\LeDucThien\ThienEntity\ent_ThemTaiKhoanNganHang.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_ThemVoucherCuaToi.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TinhThanhPho.cs" />
     <Compile Include="Models\LeDucThien\ThienEntity\ent_TrangThaiGiam.cs" />
@@ -172,6 +176,7 @@
     <Compile Include="Models\LeDucThien\ThienProcessData\pd_ChiNhanhNganHang.cs" />
     <Compile Include="Models\LeDucThien\ThienProcessData\pd_DiaChiGiaoHang.cs" />
     <Compile Include="Models\LeDucThien\ThienProcessData\pd_DieuKienGiam.cs" />
+    <Compile Include="Models\LeDucThien\ThienProcessData\pd_DonHang.cs" />
     <Compile Include="Models\LeDucThien\ThienProcessData\pd_KhachHang.cs" />
     <Compile Include="Models\LeDucThien\ThienProcessData\pd_NganHangDuocLienKet.cs" />
     <Compile Include="Models\LeDucThien\ThienProcessData\pd_QuanHuyen.cs" />
@@ -380,7 +385,6 @@
     <Content Include="Views\Voucher\voucher.cshtml" />
     <Content Include="Views\Order\order.cshtml" />
     <Content Include="Views\Notification\CapNhatDonHang.cshtml" />
-    <Content Include="Views\Shared\SideBarMyAccount.cshtml" />
     <Content Include="Views\Order\ChiTietDonHang.cshtml" />
     <Content Include="Views\Order\ChiTietHuyDonHang.cshtml" />
     <Content Include="Views\Shared\ModalMuaLai.cshtml" />
@@ -388,14 +392,13 @@
     <Content Include="Views\Shared\ModalDanhGia.cshtml" />
     <Content Include="Views\Features\Checkout.cshtml" />
     <Content Include="Views\Shared\SelectVoucher.cshtml" />
+    <Content Include="Views\Shared\SideBarMyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\LeDucThien\" />
-    <Folder Include="Models\DangNgocDung\" />
-    <Folder Include="Models\LeMinhToan\" />
-    <Folder Include="Models\TranNguyenNhatThong\" />
-    <Folder Include="Models\TranPhuocLoc\" />
+    <Folder Include="Views\AboutController\" />
+    <Folder Include="Views\Blog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

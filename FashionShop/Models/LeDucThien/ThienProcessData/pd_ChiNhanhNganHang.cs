@@ -10,18 +10,23 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
         private ConnectionDatabase con = new ConnectionDatabase();
 
         // Phương thức lấy ngân hàng theo điều kiện (Ví dụ: theo mã ngân hàng)
-        public List<ent_ChiNhanhNganHang> GetChiNhanhNganHangWhereMaNganHangLienKet(int maNganHangLienKet)
+        public List<ent_ChiNhanhNganHang> GetTenChiNhanh(int maNganHangLienKet)
         {
-            string query = "SELECT maChiNhanh, TenChiNhanh FROMChiNhanhNganHang WHERE maNganHangLienKet = @maNganHangLienKet";
             List<ent_ChiNhanhNganHang> list = new List<ent_ChiNhanhNganHang>();
+            string procedureName = "pr_LayTenChiNhanh";  // Tên của stored procedure
 
-            using (SqlConnection connection = con.GetConnection())
+            try
             {
-                try
+                using (SqlConnection connection = con.GetConnection())
                 {
                     connection.Open();
 
-                    SqlCommand cmd = new SqlCommand(query, connection);
+                    SqlCommand cmd = new SqlCommand(procedureName, connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure 
+                    };
+
+                    cmd.Parameters.AddWithValue("@maNganHangLienKet", maNganHangLienKet);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -30,22 +35,19 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
                         ent_ChiNhanhNganHang chiNhanhNganHang = new ent_ChiNhanhNganHang
                         {
                             MaChiNhanh = Convert.ToInt32(reader["maChiNhanh"]),
-                            MaNganHangLienKet = Convert.ToInt32(reader["maNganHangLienKet"]),
                             TenChiNhanh = reader["TenChiNhanh"].ToString()
                         };
 
                         list.Add(chiNhanhNganHang);
                     }
-
                     reader.Close();
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Lỗi khi truy vấn dữ liệu: " + ex.Message);
-                }
             }
-
-            return list;
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi truy vấn dữ liệu: " + ex.Message);
+            }
+            return list; // Trả về danh sách chi nhánh
         }
     }
 }

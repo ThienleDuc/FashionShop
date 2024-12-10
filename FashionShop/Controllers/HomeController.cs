@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace FashionShop.Controllers
 {
     public class HomeController : Controller
@@ -11,6 +12,7 @@ namespace FashionShop.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            
             return View();
         }
     }

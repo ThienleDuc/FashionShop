@@ -12,7 +12,7 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
         // Phương thức lấy danh sách tỉnh thành
         public List<ent_TinhThanhPho> GetAllTinhThanh()
         {
-            string query = "SELECT * FROM TinhThanh";
+            string query = "SELECT * FROM TinhThanhPho";
             List<ent_TinhThanhPho> list = new List<ent_TinhThanhPho>();
 
             using (SqlConnection connection = con.GetConnection())

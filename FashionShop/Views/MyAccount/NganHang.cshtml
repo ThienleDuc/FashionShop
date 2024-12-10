@@ -20,36 +20,37 @@
     <!-- Danh sách tài khoản -->
     @foreach (var taikhoan in ViewBag.taikhoanList)
     {
-        <div class="card p-4" id="taiKhoan_@taikhoan.BankID">
-            <div class="row align-items-center">
-                <div class="col-md-2 text-center">
-                    <div style="width: 80px; height: 80px;">
-                        <img src="@Url.Content("~/img/" + taikhoan.BankLogo)" alt="Bank Logo" class="w-100 h-100" style="object-fit: cover;" />
+        <form method="post" action="@Url.Action("XoaTaiKhoanNganHang", "MyAccount")">
+            <input type="hidden" name="BankID" value="@taikhoan.BankID" />
+            <div class="card p-4 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <div style="width: 80px; height: 80px;">
+                            <img src="@Url.Content("~/img/" + taikhoan.BankLogo)" alt="Bank Logo" class="w-100 h-100" style="object-fit: cover;" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-5">
-                    <div class="mb-2">
-                        <h6 class="mb-0"><strong>@taikhoan.BankName</strong></h6>
+                    <div class="col-5">
+                        <div class="mb-2">
+                            <h6 class="mb-0"><strong>@taikhoan.BankName</strong></h6>
+                        </div>
+                        <div class="mb-2">
+                            <span>Chủ sở hữu:</span> <strong>@taikhoan.AccountOwner</strong>
+                        </div>
+                        <div class="mb-2">
+                            <span>Chi nhánh:</span> <strong>@taikhoan.BranchName</strong>
+                        </div>
                     </div>
-                    <div class="mb-2">
-                        <span>Chủ sở hữu:</span> <strong>@taikhoan.AccountOwner</strong>
+                    <div class="col-md-3 text-center">
+                        <span>STK:</span> <strong>@taikhoan.AccountNumber</strong>
                     </div>
-                    <div class="mb-2">
-                        <span>Chi nhánh:</span> <strong>@taikhoan.BranchName</strong>
+                    <div class="col-md-2 text-center">
+                        <button type="submit" class="btn btn-danger">
+                            Xóa
+                        </button>
                     </div>
-                </div>
-                <div class="col-md-3 text-center">
-                    <span>STK:</span> <strong>@taikhoan.AccountNumber</strong>
-                </div>
-                <div class="col-md-2 text-center">
-                    <button type="button" class="btn btn-danger" id="openConfirmDelete"
-                            data-toggle="modal" data-target="#deleteBankModal"
-                            data-maTaiKhoan="@taikhoan.BankID">
-                        Xóa
-                    </button>
                 </div>
             </div>
-        </div>
+        </form>
     }
 
 </div>
@@ -64,65 +65,55 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="bankName">Tên Ngân Hàng</label>
-                    <select class="form-control" id="bankSelect">
-                        <option value="" disabled selected>Chọn Ngân Hàng</option>
-                        <!-- Các lựa chọn ngân hàng sẽ được nạp từ server -->
-                        @foreach (var nganHang in ViewBag.nganhanglienket)
-                        {
-                            <option value="@nganHang.MaNganHangLienKet">@nganHang.TenNganHang</option>
-                        }
 
-                    </select>
+            @using (Html.BeginForm("AddBankAccount", "MyAccount", FormMethod.Post, new { id = "addBankAccountForm" }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="bankName">Tên Ngân Hàng</label>
+                        <select class="form-control" id="bankSelect" name="BankId">
+                            <option value="" disabled selected>Chọn Ngân Hàng</option>
+                            @foreach (var nganHang in ViewBag.nganhanglienket)
+                            {
+                                <option value="@nganHang.MaNganHangLienKet">@nganHang.TenNganHang</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountNumber">Số Tài Khoản</label>
+                        <input type="text" class="form-control" id="accountNumber" name="AccountNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="ownerName">Tên Chủ Sở Hữu</label>
+                        <input type="text" class="form-control" id="ownerName" name="AccountOwner" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="branch">Chi Nhánh</label>
+                        <select class="form-control" id="branch" name="BranchId">
+                            <option value="" disabled selected>Chọn Chi Nhánh</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="accountNumber">Số Tài Khoản</label>
-                    <input type="text" class="form-control" id="accountNumber">
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Thêm Tài Khoản</button>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
-                <div class="form-group">
-                    <label for="ownerName">Tên Chủ Sở Hữu</label>
-                    <input type="text" class="form-control" id="ownerName" readonly>
-                    <small id="accountOwner" class="form-text text-muted" hidden></small>
-                </div>
-                <div class="form-group">
-                    <label for="branch">Chi Nhánh</label>
-                    <select class="form-control" id="branch" name="branch">
-                        <option value="" disabled selected>Chọn Chi Nhánh</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-success" id="addBankAccount">Thêm Tài Khoản</button>
-            </div>
+            }
         </div>
     </div>
 </div>
 
-<!-- Modal xác nhận xóa -->
-<div class="modal fade" id="deleteBankModal" tabindex="-1" role="dialog" aria-labelledby="deleteBankModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteBankModalLabel">Xác nhận xóa tài khoản ngân hàng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa tài khoản ngân hàng này không? Thao tác này không thể hoàn tác.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <!-- Form POST method to call the DeleteTaiKhoan action -->
-                <form id="deleteBankForm" action="@Url.Action("DeleteTaiKhoanNganHang", "MyAccount")" method="post">
-                    <!-- Thêm tham số để gửi mã tài khoản cần xóa -->
-                    <input type="hidden" name="maTaiKhoan" id="maTaiKhoanToDelete" value="" />
-                    <button type="submit" class="btn btn-danger">Xóa</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Kiểm tra và hiển thị thông báo sau khi xóa -->
+@if (TempData["SuccessMessage"] != null)
+{
+<script>
+    alert(@Html.Raw(Json.Encode(TempData["SuccessMessage"])));
+</script>}
+
+@if (TempData["ErrorMessage"] != null)
+{
+<script>
+    alert(@Html.Raw(Json.Encode(TempData["ErrorMessage"])));
+</script>}

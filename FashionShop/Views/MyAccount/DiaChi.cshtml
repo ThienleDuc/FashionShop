@@ -16,28 +16,36 @@
         </div>
     </div>
 
+    <!-- Danh sách địa chỉ -->
     @foreach (var diaChi in ViewBag.diaChiList)
     {
-        <div class="card p-4 mb-3">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="mb-2">
-                        <h6 class="mb-0">
-                            <strong>@diaChi.TenKhachHang</strong><span> | @diaChi.SDT</span>
-                        </h6>
+        <form method="post" action="@Url.Action("XoaDiaChi", "MyAccount")">
+            <input type="hidden" name="MaDiaChi" value="@diaChi.MaDiaChi" />
+            <div class="card p-4 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="mb-2">
+                            <h6 class="mb-0">
+                                <strong>@diaChi.TenKhachHang</strong><span> | @diaChi.SDT</span>
+                            </h6>
+                        </div>
+                        <div class="mb-2">
+                            <p>@diaChi.DiaChiGiaoHang</p>
+                            <p><strong>@diaChi.TenXaPhuong, @diaChi.TenQuanHuyen, @diaChi.TenTinhThanh</strong></p>
+                        </div>
                     </div>
-                    <div class="mb-2">
-                        <p>@diaChi.DiaChiGiaoHang</p>
+                    <div class="col-md-2 text-center">
+                        <button type="button" class="btn btn-success btnUpdateAddress"
+                                data-addressId="@diaChi.MaDiaChi" data-toggle="modal" data-target="#updateAddressModal">
+                            Cập nhật
+                        </button>
                     </div>
-                </div>
-                <div class="col-md-2 text-center">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateAddressModal">Cập nhật</button>
-                </div>
-                <div class="col-md-2 text-center">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAddressModal">Xóa</button>
+                    <div class="col-md-2 text-center">
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </div>
                 </div>
             </div>
-    </div>
+        </form>
     }
 </div>
 
@@ -51,62 +59,68 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="name">Tên</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nhập tên">
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Số Điện Thoại</label>
-                    <input type="text" class="form-control" id="phoneNumber" placeholder="Nhập số điện thoại">
-                </div>
-
-                <!-- Row for Select fields (Tỉnh, Quận, Xã) -->
-                <div class="row">
-                    <!-- Tỉnh / Thành phố -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control" id="province">
-                                <option value="" selected disabled>Chọn Tỉnh / Thành phố</option>
-                                <!-- Add more provinces here -->
-                            </select>
-                        </div>
+            @using (Html.BeginForm("ThemDiaChi", "MyAccount", FormMethod.Post, new { id = "addAddressForm" }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Tên</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Số Điện Thoại</label>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Nhập số điện thoại" required />
                     </div>
 
-                    <!-- Quận / Huyện -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control" id="district">
-                                <option value="" selected disabled>Chọn Quận / Huyện</option>
-                                <!-- Add more districts here -->
-                            </select>
+                    <!-- Row for Select fields (Tỉnh, Quận, Xã) -->
+                    <div class="row">
+                        <!-- Tỉnh / Thành phố -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" id="province" name="province" required>
+                                    <option value="" selected disabled>Chọn Tỉnh / Thành phố</option>
+                                    @foreach (var tt in ViewBag.list_TinhThanh)
+                                    {
+                                        <option value="@tt.MaTinhThanh">@tt.TenTinhThanh</option>
+                                    }
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Xã / Phường -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control" id="ward">
-                                <option value="" selected disabled>Chọn Xã / Phường</option>
-                                <!-- Add more wards here -->
-                            </select>
+                        <!-- Quận / Huyện -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" id="district" name="district" required>
+                                    <option value="" selected disabled>Chọn Quận / Huyện</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </div> <!-- End of Row -->
 
-                <div class="form-group">
-                    <label for="updateLocation">Địa Chỉ</label>
-                    <textarea class="form-control" id="updateLocation" rows="3">@ViewBag.DiaChi</textarea>
+                        <!-- Xã / Phường -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" id="ward" name="ward" required>
+                                    <option value="" selected disabled>Chọn Xã / Phường</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> <!-- End of Row -->
+
+                    <div class="form-group">
+                        <label for="addLocation">Địa Chỉ</label>
+                        <textarea class="form-control" id="addLocation" name="addLocation" rows="3" required></textarea>
+                    </div>
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-warning" id="addAddress">Thêm Địa Chỉ</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-warning">Thêm Địa Chỉ</button>
+                </div>
+            }
         </div>
     </div>
 </div>
+
+
 
 <!-- Modal Cập Nhật Địa Chỉ -->
 <div class="modal fade" id="updateAddressModal" tabindex="-1" role="dialog" aria-labelledby="updateAddressModalLabel" aria-hidden="true">
@@ -118,79 +132,82 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="updateName">Tên</label>
-                    <input type="text" class="form-control" id="updateName" value="@ViewBag.TenKhachHang">
-                </div>
-                <div class="form-group">
-                    <label for="updatePhoneNumber">Số Điện Thoại</label>
-                    <input type="text" class="form-control" id="updatePhoneNumber" value="@ViewBag.SDT">
-                </div>
 
-                <!-- Row for Select fields (Tỉnh, Quận, Xã) -->
-                <div class="row">
-                    <!-- Tỉnh / Thành phố -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control" id="updateProvince">
-                                <option value="" selected disabled>Chọn Tỉnh / Thành phố</option>
-                                <!-- Add more provinces here -->
-                            </select>
-                        </div>
+            @using (Html.BeginForm("CapNhatDiaChi", "MyAccount", FormMethod.Post, new { id = "updateAddressForm" }))
+            {
+                <!-- Input hidden lưu MaDiaChi -->
+                <input type="hidden" name="MaDiaChiToUpdate" id="AddressToUpdate" />
+
+                <div class="modal-body">
+                    <!-- Tên Khách Hàng -->
+                    <div class="form-group">
+                        <label for="updateName">Tên</label>
+                        <input type="text" class="form-control" id="updateName" name="TenKhachHang" />
                     </div>
 
-                    <!-- Quận / Huyện -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control" id="updateDistrict">
-                                <option value="" selected disabled>Chọn Quận / Huyện</option>
-                                <!-- Add more districts here -->
-                            </select>
-                        </div>
+                    <!-- Số Điện Thoại -->
+                    <div class="form-group">
+                        <label for="updatePhoneNumber">Số Điện Thoại</label>
+                        <input type="text" class="form-control" id="updatePhoneNumber" name="SDT" />
                     </div>
 
-                    <!-- Xã / Phường -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control" id="updateWard">
-                                <option value="" selected disabled>Chọn Xã / Phường</option>
-                                <!-- Add more wards here -->
-                            </select>
+                    <!-- Row for Select fields (Tỉnh, Quận, Xã) -->
+                    <div class="row">
+                        <!-- Tỉnh / Thành phố -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" id="updateProvince" name="TinhThanh">
+                                    <option value="" selected disabled>Chọn Tỉnh / Thành phố</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </div> <!-- End of Row -->
 
-                <div class="form-group">
-                    <label for="updateLocation">Địa Chỉ</label>
-                    <textarea class="form-control" id="updateLocation" rows="3">@ViewBag.DiaChi</textarea>
+                        <!-- Quận / Huyện -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" id="updateDistrict" name="QuanHuyen">
+                                    <option value="" selected disabled>Chọn Quận / Huyện</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Xã / Phường -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" id="updateWard" name="XaPhuong">
+                                    <option value="" selected disabled>Chọn Xã / Phường</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> <!-- End of Row -->
+                    <!-- Địa Chỉ Giao Hàng -->
+                    <div class="form-group">
+                        <label for="updateLocation">Địa Chỉ</label>
+                        <textarea class="form-control" id="updateLocation" name="DiaChiGiaoHang" rows="3"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-success" id="updateAddress">Cập Nhật</button>
-            </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-success" id="updateAddress">Cập Nhật</button>
+                </div>
+            }
         </div>
     </div>
 </div>
 
-<!-- Modal Xác Nhận Xóa -->
-<div class="modal fade" id="deleteAddressModal" tabindex="-1" role="dialog" aria-labelledby="deleteAddressModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteAddressModalLabel">Xóa Địa Chỉ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa địa chỉ này không? Thao tác này không thể hoàn tác.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!-- Kiểm tra và hiển thị thông báo sau khi xóa -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+    alert(@Html.Raw(Json.Encode(TempData["SuccessMessage"])));
+    </script>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+    alert(@Html.Raw(Json.Encode(TempData["ErrorMessage"])));
+    </script>
+}

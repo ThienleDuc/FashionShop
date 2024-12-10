@@ -12,7 +12,7 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
         // Phương thức lấy TenChuSoHuu từ số tài khoản sử dụng function SQL
         public string GetTenChuSoHuuBySoTaiKhoan(string soTaiKhoan, int maNganHangLienKet)
         {
-            string query = "SELECT dbo.GetTenChuSoHuu(@SoTaiKhoan)"; // Sử dụng function GetTenChuSoHuu
+            string query = "SELECT dbo.GetTenChuSoHuu(@SoTaiKhoan, @MaNganHangLienKet)";
             string tenChuSoHuu = null;
 
             // Tạo kết nối đến cơ sở dữ liệu

@@ -133,3 +133,17 @@
         </div>
     </div>
 </div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+    alert(@Html.Raw(Json.Encode(TempData["SuccessMessage"])));
+    </script>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+    alert(@Html.Raw(Json.Encode(TempData["ErrorMessage"])));
+    </script>
+}

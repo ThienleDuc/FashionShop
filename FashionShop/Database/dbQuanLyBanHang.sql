@@ -43,7 +43,7 @@ CREATE TABLE MauSac (
 
 -- 2.3: AnhSanPham
 CREATE TABLE AnhSanPham (
-    maAnhSanPham INT PRIMARY KEY,
+    maAnhSanPham INT PRIMARY KEY IDENTITY(1,1),
     maSanPham VARCHAR(20),
     anh VARCHAR(MAX)
 );
@@ -60,12 +60,6 @@ CREATE TABLE ChiTietSanPham (
 CREATE TABLE PhanLoai (
     maPhanLoai INT PRIMARY KEY IDENTITY(1,1),
     tenPhanLoai NVARCHAR(255)
-);
-
--- 5: PhanLoaiCon
-CREATE TABLE PhanLoaiCon (
-    maPhanLoaiCon INT PRIMARY KEY IDENTITY(1,1),
-    maPhanLoaiCha INT
 );
 
 -- 6: DanhGia
@@ -134,19 +128,13 @@ CREATE TABLE DiaChiGiaoHang (
     MaXaPhuong INT,
 	TenKhachHang NVARCHAR(255),
     SDT VARCHAR(20),
-    DiaChiGiaoHang NVARCHAR(255)
-);
-
--- 12: GioHang
-CREATE TABLE GioHang (
-    maGioHang INT PRIMARY KEY IDENTITY(1,1),
-    maAccount VARCHAR(255)
+    DiaChi NVARCHAR(MAX)
 );
 
 -- 13: ChiTietGioHang
-CREATE TABLE ChiTietGioHang (
+CREATE TABLE ChiTietDonHang (
     maChiTiet INT PRIMARY KEY IDENTITY(1,1),
-    maGioHang INT,
+    maDonHang VARCHAR(15),
     maSanPham VARCHAR(20),
     soLuongMua INT
 );
@@ -154,16 +142,18 @@ CREATE TABLE ChiTietGioHang (
 -- 14: ThanhToan
 CREATE TABLE ThanhToan (
     maThanhToan INT PRIMARY KEY IDENTITY(1,1),
-    maGioHang INT,
+    maDonHang VARCHAR(15),
+	MaDiaChi INT,
     phuongThucThanhToan NVARCHAR(255),
     luuYKhiNhanHang NVARCHAR(255),
-	TongTien DECIMAL(10, 2)
+	maVoucherCuaToi INT,
+	TongTien INT
 );
 
 -- 15: DonHang
 CREATE TABLE DonHang (
     maDonHang VARCHAR(15) PRIMARY KEY,
-    maGioHang INT
+	maAccount VARCHAR(255)
 );
 
 -- 16: TrangThaiGiaoHang
@@ -228,104 +218,127 @@ CREATE TABLE VoucherCuaToi (
 
 -- Bảng 9: QuanHuyen
 ALTER TABLE QuanHuyen
-ADD CONSTRAINT FK_QuanHuyen_TinhThanh FOREIGN KEY (MaTinhThanh) REFERENCES TinhThanhPho(MaTinhThanh);
+ADD CONSTRAINT FK_QuanHuyen_TinhThanh FOREIGN KEY (MaTinhThanh) 
+REFERENCES TinhThanhPho(MaTinhThanh) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 10: XaPhuong
 ALTER TABLE XaPhuong
-ADD CONSTRAINT FK_XaPhuong_QuanHuyen FOREIGN KEY (MaQuanHuyen) REFERENCES QuanHuyen(MaQuanHuyen);
+ADD CONSTRAINT FK_XaPhuong_QuanHuyen FOREIGN KEY (MaQuanHuyen) 
+REFERENCES QuanHuyen(MaQuanHuyen) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 2: SanPham
 ALTER TABLE SanPham
-ADD CONSTRAINT FK_SanPham_PhanLoai FOREIGN KEY (maphanLoai) REFERENCES PhanLoai(maPhanLoai);
+ADD CONSTRAINT FK_SanPham_PhanLoai FOREIGN KEY (maphanLoai) 
+REFERENCES PhanLoai(maPhanLoai) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 2.1: KichThuoc
 ALTER TABLE KichThuoc
-ADD CONSTRAINT FK_KichThuoc_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id);
+ADD CONSTRAINT FK_KichThuoc_SanPham FOREIGN KEY (maSanPham) 
+REFERENCES SanPham(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 2.2: MauSac
 ALTER TABLE MauSac
-ADD CONSTRAINT FK_MauSac_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id);
+ADD CONSTRAINT FK_MauSac_SanPham FOREIGN KEY (maSanPham) 
+REFERENCES SanPham(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 2.3: AnhSanPham
 ALTER TABLE AnhSanPham
-ADD CONSTRAINT FK_AnhSanPham_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id);
-
--- Bảng 5: PhanLoaiCon
-ALTER TABLE PhanLoaiCon
-ADD CONSTRAINT FK_PhanLoaiCon_PhanLoai FOREIGN KEY (maPhanLoaiCha) REFERENCES PhanLoai(maPhanLoai);
+ADD CONSTRAINT FK_AnhSanPham_SanPham FOREIGN KEY (maSanPham) 
+REFERENCES SanPham(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 3: ChiTietSanPham
 ALTER TABLE ChiTietSanPham
-ADD CONSTRAINT FK_ChiTietSanPham_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id);
+ADD CONSTRAINT FK_ChiTietSanPham_SanPham FOREIGN KEY (maSanPham) 
+REFERENCES SanPham(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 6: DanhGia
 ALTER TABLE DanhGia
-ADD CONSTRAINT FK_DanhGia_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id),
-    CONSTRAINT FK_DanhGia_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username);
+ADD CONSTRAINT FK_DanhGia_SanPham FOREIGN KEY (maSanPham) 
+REFERENCES SanPham(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_DanhGia_KhachHang FOREIGN KEY (maAccount) 
+	REFERENCES KhachHang(username) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 11: DiaChiGiaoHang
 ALTER TABLE DiaChiGiaoHang
-ADD CONSTRAINT FK_DiaChi_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username),
-    CONSTRAINT FK_DiaChi_TinhThanh FOREIGN KEY (MaTinhThanh) REFERENCES TinhThanhPho(MaTinhThanh),
-    CONSTRAINT FK_DiaChi_QuanHuyen FOREIGN KEY (MaQuanHuyen) REFERENCES QuanHuyen(MaQuanHuyen),
-    CONSTRAINT FK_DiaChi_XaPhuong FOREIGN KEY (MaXaPhuong) REFERENCES XaPhuong(MaXaPhuong);
-
--- Bảng 12: GioHang
-ALTER TABLE GioHang
-ADD CONSTRAINT FK_GioHang_KhachHang FOREIGN KEY (maAccount) REFERENCES KhachHang(username);
-
--- Bảng 13: ChiTietGioHang
-ALTER TABLE ChiTietGioHang
-ADD CONSTRAINT FK_ChiTietGioHang_GioHang FOREIGN KEY (maGioHang) REFERENCES GioHang(maGioHang),
-    CONSTRAINT FK_ChiTietGioHang_SanPham FOREIGN KEY (maSanPham) REFERENCES SanPham(id);
-
--- Bảng 14: ThanhToan
-ALTER TABLE ThanhToan
-ADD CONSTRAINT FK_ThanhToan_GioHang FOREIGN KEY (maGioHang) REFERENCES GioHang(maGioHang);
-
--- Bảng 15: DonHang
-ALTER TABLE DonHang
-ADD CONSTRAINT FK_DonHang_GioHang FOREIGN KEY (maGioHang) REFERENCES GioHang(maGioHang);
+ADD CONSTRAINT FK_DiaChi_KhachHang FOREIGN KEY (maAccount) 
+REFERENCES KhachHang(username) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_DiaChi_TinhThanh FOREIGN KEY (MaTinhThanh) 
+	REFERENCES TinhThanhPho(MaTinhThanh) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_DiaChi_QuanHuyen FOREIGN KEY (MaQuanHuyen) 
+	REFERENCES QuanHuyen(MaQuanHuyen) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_DiaChi_XaPhuong FOREIGN KEY (MaXaPhuong) 
+	REFERENCES XaPhuong(MaXaPhuong) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 16: TrangThaiGiaoHang
 ALTER TABLE TrangThaiGiaoHang
-ADD CONSTRAINT FK_TrangThaiGiaoHang_DonHang FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang);
+ADD CONSTRAINT FK_TrangThaiGiaoHang_DonHang FOREIGN KEY (maDonHang) 
+REFERENCES DonHang(maDonHang) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 17: ThongBao
 ALTER TABLE ThongBao
-ADD CONSTRAINT FK_ThongBao_DonHang FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang);
+ADD CONSTRAINT FK_ThongBao_DonHang FOREIGN KEY (maDonHang) 
+REFERENCES DonHang(maDonHang) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Bảng 18: Voucher
 ALTER TABLE Voucher
 ADD CONSTRAINT FK_Voucher_DieuKienGiam
-FOREIGN KEY (MaDieuKien) REFERENCES DieuKienGiam(maDieuKien);
+FOREIGN KEY (MaDieuKien) REFERENCES DieuKienGiam(maDieuKien) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Voucher
 ADD CONSTRAINT FK_Voucher_TrangThaiGiam
-FOREIGN KEY (maTrangThaiGiam) REFERENCES TrangThaiGiam(maTrangThaiGiam);
+FOREIGN KEY (maTrangThaiGiam) REFERENCES TrangThaiGiam(maTrangThaiGiam) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE VoucherCuaToi
 ADD CONSTRAINT FK_VoucherCuaToi_Voucher
-FOREIGN KEY (maVoucher) REFERENCES Voucher(maVoucher);
+FOREIGN KEY (maVoucher) REFERENCES Voucher(maVoucher) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE VoucherCuaToi
 ADD CONSTRAINT FK_VoucherCuaToi_KhachHang
-FOREIGN KEY (maAccount) REFERENCES KhachHang(username);
+FOREIGN KEY (maAccount) REFERENCES KhachHang(username)  ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 -- Ngân hàng --
 ALTER TABLE ChiNhanhNganHang
 ADD CONSTRAINT FK_ChiNhanhNganHang_NganHangDuocLienKet FOREIGN KEY (maNganHangLienKet)
-REFERENCES NganHangDuocLienKet(MaNganHangLienKet);
+REFERENCES NganHangDuocLienKet(MaNganHangLienKet) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE TaiKhoanNganHangDuocLienKet
 ADD CONSTRAINT FK_TaiKhoanNganHangDuocLienKet_NganHangDuocLienKet FOREIGN KEY (MaNganHangLienKet)
-REFERENCES NganHangDuocLienKet(MaNganHangLienKet);
+REFERENCES NganHangDuocLienKet(MaNganHangLienKet) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE TaiKhoanNganHangCuaToi
 ADD CONSTRAINT FK_TaiKhoanNganHangCuaToi_KhachHang FOREIGN KEY (maAccount)
-REFERENCES KhachHang(username);
+REFERENCES KhachHang(username) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE TaiKhoanNganHangCuaToi
 ADD CONSTRAINT FK_TaiKhoanNganHangCuaToi_NganHangDuocLienKet FOREIGN KEY (maNganHangLienKet)
-REFERENCES NganHangDuocLienKet(MaNganHangLienKet);
+REFERENCES NganHangDuocLienKet(MaNganHangLienKet) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+-- Ensure DonHang table exists
+ALTER TABLE ChiTietDonHang
+ADD CONSTRAINT FK_ChiTietDonHang_DonHang
+FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- Ensure SanPham table exists (if applicable)
+ALTER TABLE ChiTietDonHang
+ADD CONSTRAINT FK_ChiTietDonHang_SanPham
+FOREIGN KEY (maSanPham) REFERENCES SanPham(id) ON DELETE CASCADE ON UPDATE CASCADE;  
+
+-- Ensure KhachHang table exists
+ALTER TABLE DonHang
+ADD CONSTRAINT FK_DonHang_Account
+FOREIGN KEY (maAccount) REFERENCES KhachHang(username) ON DELETE CASCADE ON UPDATE CASCADE; 
+
+-- Ensure DonHang table exists
+ALTER TABLE ThanhToan
+ADD CONSTRAINT FK_ThanhToan_DonHang
+FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE ThanhToan
+ADD CONSTRAINT FK_ThanhToan_VoucherCuaToi
+FOREIGN KEY (maVoucherCuaToi) REFERENCES VoucherCuaToi(maVoucherCuaToi) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE ThanhToan
+ADD CONSTRAINT FK_ThanhToan_DiaChiGiaoHang
+FOREIGN KEY (MaDiaChi) REFERENCES DiaChiGiaoHang(MaDiaChi) ON DELETE CASCADE ON UPDATE CASCADE;

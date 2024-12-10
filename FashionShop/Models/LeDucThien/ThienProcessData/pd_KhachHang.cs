@@ -176,6 +176,36 @@ namespace FashionShop.Models.LeDucThien.ThienProcessData
                 }
             }
         }
+
+        public void CapNhatMatKhau(string username, string newMatKhau)
+        {
+            string procedureName = "pr_UpdateMatKhau"; // Tên stored procedure
+
+            using (SqlConnection connection = con.GetConnection())
+            {
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(procedureName, connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure // Đặt kiểu là stored procedure
+                    };
+
+                    // Thêm tham số đầu vào cho stored procedure
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@newMatKhau", newMatKhau);
+
+                    cmd.ExecuteNonQuery(); // Thực thi stored procedure
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý lỗi: Ghi log hoặc ném lại lỗi
+                    Console.WriteLine("Lỗi khi cập nhật mật khẩu: " + ex.Message);
+                    throw; // Nếu cần ném lại lỗi cho cấp trên xử lý
+                }
+            }
+        }
     }
 
 }
